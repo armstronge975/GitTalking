@@ -1,0 +1,12 @@
+/* This style sheet applies solely to placeholder UI pages */
+/* Used in temp-login.html and temp_register.html */
+#loginPg{
+	background-image:url("../images/temp_login.png");
+	background-repeat:no-repeat;
+	background-size:100%
+}
+#registerPg {
+	background-image:url("../images/temp_register.png");
+	background-repeat:no-repeat;
+	background-size:100%
+}

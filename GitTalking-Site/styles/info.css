@@ -1,4 +1,4 @@
-/* This style sheet will be used by all general informational pages. */
+﻿/* This style sheet will be used by all general informational pages. */
 /* This style sheet is linked to: index.html, team.html, about.html, upcoming.html */
 
 /* The following code applies to all pages 
@@ -90,4 +90,19 @@ li{font-size:15px}
 #teamPic {
 	width:130px;
 	height:100px;
+}
+
+/* General objects available */
+.button {
+	display: inline-block;
+	line-height: 3;
+	padding: 8px 11px;
+	text-decoration: none;
+	font-weight: bold;
+	color: white;
+	background-color: green;
+	border: 2px;
+	font-size: 20px;
+	font-family: Garamond;
+	border-radius: 25px;
 }

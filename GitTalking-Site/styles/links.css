@@ -1,4 +1,4 @@
-/* This CSS file contains the styling for both links, and horizontal navigation bars. It was removed from info.css to allow different kinds of 
+﻿/* This CSS file contains the styling for both links, and horizontal navigation bars. It was removed from info.css to allow different kinds of 
 files to share this format.
 */
 /* Horizontal Navigation Bar Elements */
@@ -14,7 +14,7 @@ li.navbar{
 	 text-align:center;
      display:inline; 
 	 margin:0 10px;
-	 font-size:25px
+	 font-size:25px;
 }
 
 /* Applies to the login and register links at the top of index.html */

@@ -8,6 +8,7 @@
 body {
 	background-color:black;
 	font-family:Arial;
+	overflow: Scrollbar;
 }
 /* All paragraphs within html body */
 p {text-align:left; color:gold; text-indent:35px;}

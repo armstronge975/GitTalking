@@ -1,4 +1,6 @@
-<! Doctype html>
+﻿<! Doctype html>
+<!-- This page serves as a place holder for a functional registration page. -->
+<!-- The page is simply an empty html document with a backround-image of a wireframe mockup -->
 <html>
  <head>
  <meta charset="utf-8">
@@ -6,7 +8,7 @@
  <link rel="stylesheet" type="text/css" href="styles/links.css">
  <link rel="stylesheet" type="text/css" href="styles/info.css">
  <script type="text/javascript" src="scripts/jquery.js"></script>
- <title>Hello World Repository</title>
+ <title>Message</title>
  </head>
  <body>
  <h1 style="float:left;">Hello, armstronge975!</h1>
@@ -16,27 +18,22 @@
 	<option value="timeline.html">Your Profile</option>
 	<option value="account.html">Your Account Settings</option>
 	<option value="index.html">Logout</option>
- </select>1
- <input type="button" style="display:inline-block; margin-left: 20%; background-color: red;" onclick="window.location.replace('index.html');" class="button" value="Logout" id="login"></span> 	
-  <hr style="height: 0px; ">
- <h1 style="float:left;">Hello-World</h1><br><br><br>
-
-  <!-- Links to other pages in Horizontal NavBar.--> 
-  <!-- Links, in order: GitHub repository link, meet the team, about us page, and upcoming features page.-->
-  <br><br>
-  <!-- TODO for later: decide how Files will be uploaded -->
-  <table border='1'>
-  <tr><td><input type="button" class="button" value="+ Add Files">
-  <input type="button" class="button" value="View Collaborators">
-  <input type="button" class="button" value="- Delete Repository" style="background-color:red">
-  </td></tr>
-  <tr><td>Most recent commit: Edited README.md 2 days ago</td></tr>
-  <tr><td><a href='readme.html'>README.md</a></td></tr>
-  <tr><td>README.md contents:<br>My first repository. Let's keep the ball rolling!</td></tr>
-  </table>
-  <br><br>
-  <a href="welcome.html">Go back.</a><br>
-    <hr>
+ </select>
+ <input type="button" style="display:inline-block; margin-left: 20%; background-color: red;" onclick="window.location.replace('index.html');" class="button" value="Logout" id="login"></span>
+   <hr style="height: 0px; ">
+ <h1>Compose a New Message</h1>
+ <br><a href="messages.html"><h2 align"center">Go back</h2></a>
+ <p style="text-align:center;"><strong>NOTE: Private messages can only be sent between members collaborating in the same repositories.</strong></p>
+  <hr>
+  <form action="welcome.html">
+  	<span class="login" style="width: 100%; text-align:center;">
+		<span style="width:10%;">To: </span> <input type="text" maxlength="50" style="width: 264px"><br><br>
+		<span>Message:</span><br>
+		<textarea wrap="hard" rows="8" style="width:300px;"></textarea>
+  	</span><br><br><br>
+  	<input class="button" value="Send Message" onclick="window.location.replace('messages.html');" style="position: relative;left:44%;">
+  </form>
+  <hr>
   <ul class="bottomnavbar">
 	<li class="navbar"> <a target="_blank" href="https://github.com/armstronge975/GitTalking">Project on GitHub</a></li>
 	<li class="navbar"> <a href="team.html">The GitTalking Team</a></li>

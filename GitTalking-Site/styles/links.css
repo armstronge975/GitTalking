@@ -1,54 +1,34 @@
-﻿/* This CSS file contains the styling for both links, and horizontal navigation bars. It was removed from info.css to allow different kinds of 
-files to share this format.
-*/
-/* Horizontal Navigation Bar Elements */
-/* Navigation Bar List */
-ul.navbar {
-    list-style:none outside none; 
-	margin:0; 
-	padding:0; 
-	text-align:center 
-}
-/* Navigation Bar List Items */
-li.navbar{
-	 text-align:center;
-     display:inline; 
-	 margin:0 10px;
-	 font-size:25px;
-}
-
-/* Applies to the login and register links at the top of index.html */
-ul.topnavbar {
-	position: absolute;
-    list-style:none outside none; 
-	margin:0; 
-	padding:0; 
-	text-align:center 
-}
-
-/* Applies to temp_login.html and temp_register.html */
-ul.bottomnavbar {
-	text-align:center;
-	position: absolute;
-	bottom:10px;
-	width:100%;
-    list-style:none outside none; 
-}
+﻿/* This CSS file styles all the links and navigation bars on the GitTalking site.*/
 
 /* Links */
+/* -----------------------------------------------------*/
 /* Idle, unvisited link */
 a:link{
-	color:red;
+	color:yellow;
 	text-decoration:underline;
 }
 /* Link that's been clicked on */
 a:visited{
-	color:silver;
+	color:red;
 	text-decoration:underline;
 }
-
 /* Link that the user's mouse is currently over */
 a:hover{
 	color:green;
 	text-decoration:underline;
+}
+
+/* Horizontal Navigation Bar Elements */
+/* -----------------------------------------------------*/
+/* bottom nav bar is the set of links at the bottom of site pages */
+ul.bottomnavbar {
+    list-style:none outside none;
+	text-align:center;
+	margin:0;
+	padding:0;
+}
+/* the items within the bottom navbar */
+li.nvbr{
+     display:inline; 
+	 margin:0px 20px;
 }

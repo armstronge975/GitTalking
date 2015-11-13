@@ -8,10 +8,17 @@ people to use it. -->
   <title>GitTalking Homepage</title>
   <link rel="stylesheet" type="text/css" href="styles/info.css">
   <link rel="stylesheet" type="text/css" href="styles/links.css">
+  <link rel="stylesheet" type="text/css" href="styles/ui.css">
  </head>
  
  <!-- Beginning of Content -->
  <body>
+   <!-- Links to login and registration -->
+  <form id="userBtns" action="login.html">
+	<button class="genBtn" id="btnLogin" type="submit">LOGIN</button>
+	<button class="genBtn" id="btnSignup" type="submit" formaction="register.html">SIGNUP</button>
+  </form>
+  <br><br><br><br><br><br>
   <a href="http://strose.edu">
    <img id="srLogo" src="images/stroseLogo.jpeg" alt="Where is my logo!?">
   </a>
@@ -21,15 +28,6 @@ people to use it. -->
   <h2> The College of Saint Rose </h2>
   <hr>
   <br>
-  
-  <!-- Links to login and registration -->
-  <ul class="topnavbar">
-	<li class="navbar"> <a href="login.html">Already a member? Login here!</a></li>
-	<li class="navbar"> <a href="register.html">Interested? Sign up for free here!</a></li>
-  </ul>
-  
-  <br><br>
-  
   <!-- What is GitTalking -->
   <h2> What is GitTalking? </h2>
   <p> Welcome to GitTalking! This site embodies (or at least it will!) the unique fusion of the technical collaboration of GitHub, and the social interaction of
@@ -88,11 +86,11 @@ people to use it. -->
   <hr>
   <!-- Links to other pages in Horizontal NavBar.--> 
   <!-- Links, in order: GitHub repository link, meet the team, about us page, and upcoming features page.-->
-  <ul class="navbar">
-	<li class="navbar"> <a target="_blank" href="https://github.com/armstronge975/GitTalking">Project on GitHub</a></li>
-	<li class="navbar"> <a href="team.html">The GitTalking Team</a></li>
-	<li class="navbar"> <a href="about.html">About</a></li>
-	<li class="navbar"> <a href="upcoming.html">Coming Up</a></li>
+  <ul class="bottomnavbar">
+	<li class="nvbr"> <a target="_blank" href="https://github.com/armstronge975/GitTalking">Project on GitHub</a></li>
+	<li class="nvbr"> <a href="team.html">The GitTalking Team</a></li>
+	<li class="nvbr"> <a href="about.html">About</a></li>
+	<li class="nvbr"> <a href="upcoming.html">Coming Up</a></li>
   </ul>
  </body>
 </html>

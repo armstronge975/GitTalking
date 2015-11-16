@@ -3,14 +3,15 @@
 
 /* The following code applies to all pages 
 ********************************************************/
-
 /* Body of html doc*/
 body {
 	background-color:black;
 	font-family:Arial;
 	overflow: Scrollbar;
 }
+
 /* All paragraphs within html body */
+/*general*/
 p {text-align:left; color:gold; text-indent:35px;}
 
 /* Headings */
@@ -26,6 +27,7 @@ td {
 	color: gold;
 	text-align: center;
 }
+
 /* Images */
 /* GitTalking Logo */
 #gtLogo {float:left; width:250px; height:125px;}
@@ -33,10 +35,13 @@ td {
 /* College of Saint Rose Logo */
 #srLogo {float:right; width:250px; height:125px;}
 
-/* The following code applies specifically to index.html
+#loginPic {display:inline-block; width:500px; height:250px;}
+
+/* The following code applies specifically to certain pages
 
 ********************************************************/
 
+/* index.html (The homepage) */
 /* Styling by element classes */
 /* The classes for the features lists */
 .socialFeatures{
@@ -61,9 +66,8 @@ td {
 	margin:auto;
 }
 
-/* The following code applies specifically to about.html
-********************************************************/
 
+/* about.html */
 /* Class for technology lists in about.html */
 .techList{
 	text-align:left;
@@ -77,9 +81,8 @@ td {
 	list-style-type:circle;
 }
 
-/* The following code applies specifically to team.html
-********************************************************/
 
+/* team.html */
 /* Team profile boxes within team.html */
 .devTeam{
 	display:inline-block;
@@ -97,28 +100,4 @@ td {
 #teamPic {
 	width:130px;
 	height:100px;
-}
-
-/* General objects available */
-.button {
-	display: inline-block;
-	line-height: 3;
-	padding: 8px 11px;
-	text-align: center;
-	text-decoration: none;
-	font-weight: bold;
-	color: white;
-	background-color: green;
-	border: 2px;
-	font-size: 20px;
-	font-family: Garamond;
-	border-radius: 25px;
-}
-
-/* login form */
-form > span.login {
-	zoom: 1;
-	width: 20%;
-	display: inline-block;
-	color: gold;
 }

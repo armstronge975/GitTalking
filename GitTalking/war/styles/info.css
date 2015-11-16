@@ -1,0 +1,124 @@
+﻿/* This style sheet will be used by all general informational pages. */
+/* This style sheet is linked to: index.html, team.html, about.html, upcoming.html */
+
+/* The following code applies to all pages 
+********************************************************/
+
+/* Body of html doc*/
+body {
+	background-color:black;
+	font-family:Arial;
+	overflow: Scrollbar;
+}
+/* All paragraphs within html body */
+p {text-align:left; color:gold; text-indent:35px;}
+
+/* Headings */
+h2{text-align:center; color:gold; text-decoration:underline;}
+h1{text-align:center; color:gold; text-decoration:underline;}
+h3{text-decoration:underline; color:gold; float: left;}
+span{color: gold;}
+
+/* All List Items */
+li{font-size:15px}
+
+td {
+	color: gold;
+	text-align: center;
+}
+/* Images */
+/* GitTalking Logo */
+#gtLogo {float:left; width:250px; height:125px;}
+
+/* College of Saint Rose Logo */
+#srLogo {float:right; width:250px; height:125px;}
+
+/* The following code applies specifically to index.html
+
+********************************************************/
+
+/* Styling by element classes */
+/* The classes for the features lists */
+.socialFeatures{
+	display:inline-block;
+	color:gold;
+	list-style-type:square;
+	padding:0;
+	margin:auto;
+}
+.productiveFeatures{
+	display:inline-block;
+	color:gold;
+	list-style-type:square;
+	padding:0;
+	margin:auto;
+}
+.gitFeatures{
+	display:inline-block;
+	color:gold;
+	list-style-type:square;
+	padding:0;
+	margin:auto;
+}
+
+/* The following code applies specifically to about.html
+********************************************************/
+
+/* Class for technology lists in about.html */
+.techList{
+	text-align:left;
+	color:gold;
+}
+
+/* List items of used languages in about.html */
+#lang{
+	font-size:25px;
+	color:gold;
+	list-style-type:circle;
+}
+
+/* The following code applies specifically to team.html
+********************************************************/
+
+/* Team profile boxes within team.html */
+.devTeam{
+	display:inline-block;
+	text-align:center;
+	background-color:maroon;
+	padding:2px;
+	margin:50px 100px;
+	color:yellow;
+	border:1px solid gold;
+	width:200px;
+	height:200px;
+}
+
+/* Style for the knight pictures for each team member on team.html */
+#teamPic {
+	width:130px;
+	height:100px;
+}
+
+/* General objects available */
+.button {
+	display: inline-block;
+	line-height: 3;
+	padding: 8px 11px;
+	text-align: center;
+	text-decoration: none;
+	font-weight: bold;
+	color: white;
+	background-color: green;
+	border: 2px;
+	font-size: 20px;
+	font-family: Garamond;
+	border-radius: 25px;
+}
+
+/* login form */
+form > span.login {
+	zoom: 1;
+	width: 20%;
+	display: inline-block;
+	color: gold;
+}

@@ -32,3 +32,8 @@ li.nvbr{
      display:inline; 
 	 margin:0px 20px;
 }
+
+#cont {
+	text-align:center;
+	font-size:25px;
+}

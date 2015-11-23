@@ -4,23 +4,24 @@
 <html>
  <head>
  <meta charset="utf-8">
- <link rel="stylesheet" type="text/css" href="styles/tempUI.css">
+ <link rel="stylesheet" type="text/css" href="styles/ui.css">
  <link rel="stylesheet" type="text/css" href="styles/links.css">
  <link rel="stylesheet" type="text/css" href="styles/info.css">
  <script type="text/javascript" src="scripts/jquery.js"></script>
  <title>Pull Requests</title>
  </head>
  <body>
- <h1 style="float:left;">armstronge975's Pull Requests</h1>
- <input type="text" placeholder="Search a repository, username or full name" style="width: 20%; margin-left: 12%; border-radius: 25px;">
- <select style="width: 10%; margin-left: 7%; border-radius: 25px;">
-	<option value="">armstronge975</option>
-	<option value="timeline.html">Your Profile</option>
-	<option value="account.html">Your Account Settings</option>
-	<option value="index.html">Logout</option>
+ <h1 class="userCntrls" id="welcomeMsg">Hello, armstronge975!</h1>
+ <input class="userCntrls" type="text" id="repoSearch" placeholder="Search a repository, username or full name">
+ <select class="userCntrls" id="userDropMenu">
+	<option value="" id="activeUser">armstronge975</option>
+	<option class="altOps" value="timeline.html">Your Profile</option>
+	<option class="altOps" value="messages.html">Your Private Messages</option>
+	<option class="altOps" value="account.html">Your Account Settings</option>
+	<option class="altOps" value="index.html">Logout</option>
  </select>
- <input type="button" style="display:inline-block; margin-left: 20%; background-color: red;" onclick="window.location.replace('index.html');" class="button" value="Logout" id="login"></span> 	
-  <hr style="height: 0px; ">
+ <!-- the onclick event handler below will be replaced with a proper logout script at a later date -->
+ <input class="userCntrls" type="button" id="logout" onclick="window.location.replace('index.html');" value="Logout">
   <!-- Links to other pages in Horizontal NavBar.--> 
   <!-- Links, in order: GitHub repository link, meet the team, about us page, and upcoming features page.-->
   <br><br>

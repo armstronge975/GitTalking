@@ -52,5 +52,12 @@ public class HomeController {
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
 	public String returnToHome(Model model) {		
 		return "welcome";
+		
+	}
+	
+	@RequestMapping(value = "/upcoming", method = RequestMethod.GET)
+	public String upcoming(Model model) {
+		return "upcoming";
+		
 	}
 }

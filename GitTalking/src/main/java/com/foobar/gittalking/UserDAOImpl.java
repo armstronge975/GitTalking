@@ -28,4 +28,22 @@ public class UserDAOImpl implements UserDAO {
              System.out.println("User saved with id="+user.getUserID());
          }else System.out.println("User save failed with id="+user.getUserID());
     }
+    
+    // check if userID available
+    @Override
+    public User checkUserID(String userID) {
+    	String query = "SELECT user_id from standard_user, admin_user WHERE user_id = ?";
+    	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        
+        //using RowMapper anonymous class, we can create a separate RowMapper for reuse
+        User user = jdbcTemplate.queryForObject(query, new Object[]{userID}, new RowMapper<User>(){
+ 
+            @Override
+            public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+            	User user = new User();
+            	user.setUserID(rs.getString("userID"));
+            	return user;
+            }});
+        return user;
+    }
 }

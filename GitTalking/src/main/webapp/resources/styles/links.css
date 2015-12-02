@@ -1,0 +1,39 @@
+﻿/* This CSS file styles all the links and navigation bars on the GitTalking site.*/
+
+/* Links */
+/* -----------------------------------------------------*/
+/* Idle, unvisited link */
+a:link{
+	color:yellow;
+	text-decoration:underline;
+}
+/* Link that's been clicked on */
+a:visited{
+	color:red;
+	text-decoration:underline;
+}
+/* Link that the user's mouse is currently over */
+a:hover{
+	color:green;
+	text-decoration:underline;
+}
+
+/* Horizontal Navigation Bar Elements */
+/* -----------------------------------------------------*/
+/* bottom nav bar is the set of links at the bottom of site pages */
+ul.bottomnavbar {
+    list-style:none outside none;
+	text-align:center;
+	margin:0;
+	padding:0;
+}
+/* the items within the bottom navbar */
+li.nvbr{
+     display:inline; 
+	 margin:0px 20px;
+}
+
+#cont {
+	text-align:center;
+	font-size:25px;
+}

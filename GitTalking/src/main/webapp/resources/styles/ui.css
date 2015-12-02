@@ -1,0 +1,199 @@
+/* This css file styles UI elements across all pages on the GitTalking site */
+
+/* Universal UI elements */
+/*--------------------------------------------------*/
+/* general button class */
+.genBtn {
+	display: inline-block;
+	line-height: 3;
+	padding: 8px 11px;
+	text-align: center;
+	text-decoration: none;
+	font-weight: bold;
+	color: white;
+	background-color: green;
+	border: 2px;
+	font-size: 20px;
+	font-family: Garamond;
+	border-radius: 25px;
+}
+/* general label class for input elements */
+.lbl{
+	color:gold;
+	font-size:20px;
+	padding-right:10px;
+	clear:left;
+	text-align:right;
+	width:200px;
+	float:left;
+}
+
+/* All accessible pages before a login. (index, about, upcoming, team) */
+/* login button */
+#userBtns{
+	float:right;
+}
+/* login button */
+#btnLogin {
+	background-color:lawngreen;
+	padding:5px 5px;
+	font-size:15px;
+	border-radius:0;
+	margin-right:10px;
+	width:100px;
+	height:50px;
+}
+/* signup button */
+#btnSignup{
+	background-color:blue;
+	padding:5px 5px;
+	border-radius:0;
+	font-size:15px;
+	width:100px;
+	height:50px;
+}
+
+/* All logged-in pages */
+/* The user welcome message, repo search bar, user drop-down menu, and logout button */
+.userCntrls{
+	margin-top:5px;
+	position:absolute;
+}
+.altOps {
+	color:gold;
+}
+#repoSearch {
+	width:25%; 
+	margin-left: 40%; 
+	border-radius:25px;
+}
+#userDropMenu {
+	width:10%; 
+	margin-left:83.5%; 
+	border-radius:0;
+	background-color:purple;
+	color:white;
+}
+#welcomeMsg {
+	text-align:left;
+}
+#logout {
+	display:inline-block; 
+	margin-left:95%; 
+	background-color:red;
+	color:white;
+}
+
+
+/* The following code applies to specific pages */
+/*--------------------------------------------------*/
+
+/* Login page */
+/*--------------------------------------------------*/
+/* the gitTalking label heading */
+#lblImg {
+	width: 20%;
+	display: inline-block;
+	color: gold;
+	position:far-left;
+	font-size:36px;
+	padding-right:50px;
+}
+/* the username and password labels */
+.lblLog{
+	color:gold;
+	font-size:20px;
+	padding-right:10px;
+	text-align:right;
+	width:200px;
+}
+
+
+/* Registration page */
+/*--------------------------------------------------*/
+/* class for input fields */
+.inField {
+	width:264px;
+	float:left;
+}
+/* registration submit button */
+#regSub{
+	margin-left:15%;
+}
+/* fieldset on registration form containing account type radio buttons */
+#regFld{
+	text-align:center;
+	width:45%;
+	margin-left:30px;
+}
+/* the acct type label */
+.cLbl{
+	text-align:center;
+	color:gold;
+	font-size:20px;
+}
+/* the registration form */
+#regFrm{
+	margin-left:30%;
+}
+/* registration requirement note */
+#regNote{
+	text-align:center;
+	text-decoration:underline;
+	color:red;
+}
+
+/* Tutorial page */
+/*--------------------------------------------------*/
+#btnCont {
+	margin-left:45%;
+}
+
+/* Welcome page (User Home Page) */
+/*--------------------------------------------------*/
+#welcomeImg {
+	width:30%;
+	height:50%;
+	margin-left:52%;
+}
+.heads{
+	text-align:left;
+}
+#btnAddRepo{
+	border-radius:0;
+	font-size:15px;
+	padding:2px;
+}
+#repoList{
+	font-size:12px;
+	border:2px;
+	border-color:gold;
+	background-color:gray;
+	color:gold;
+	width:600px;
+}
+#socialList{
+	font-size:12px;
+	border:2px;
+	border-color:gold;
+	background-color:gray;
+	color:gold;
+	width:600px;
+}
+#resources{
+	background-color:gold;
+	border:1px;
+	border-color:purple;
+	width:230px;
+	height:400px;
+	float:right;
+	margin-top:8%;
+}
+#resources > h1 {color:black; text-decoration:underline;}
+#resources > a:visited{color:black;}
+#resources > a:hover{color:purple;}
+#resources> a:link{color:blue;}
+
+
+/* User Timeline page */
+/*--------------------------------------------------*/

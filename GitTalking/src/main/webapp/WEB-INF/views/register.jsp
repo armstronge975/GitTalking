@@ -1,11 +1,12 @@
-﻿<!DOCTYPE html>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!DOCTYPE html>
 <html>
  <head>
  <meta charset="utf-8">
- <link rel="stylesheet" type="text/css" href="styles/ui.css">
- <link rel="stylesheet" type="text/css" href="styles/links.css">
- <link rel="stylesheet" type="text/css" href="styles/info.css">
- <script type="text/javascript" src="scripts/jquery.js"></script>
+ <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/info.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/links.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/ui.css">
+ <script src="<%=request.getContextPath()%>/resources/scripts/jquery.js"></script>
  <script type="text/javascript">
  	function checkPW(btn1, btn2) {
  		if(btn1.value != btn2.value){
@@ -19,13 +20,13 @@
  </head>
  <body>
  <h1>Create an Account</h1>
- <h2 align="center"><a href="index.html">Go back</a></h2>
+ <a href="<%=request.getContextPath()%>/"><h2 align="center">Go back</h2></a>
  <p id="regNote"><strong>Fill in the needed information below. All fields are required.</strong></p>
   <hr>
   <br><br>
-  <form id="regFrm" action="tutorial.html" method="post" onsubmit="return checkPW(txtPass, txtCheck);">
+  <form id="regFrm" action="welcome" method="post" onsubmit="return checkPW(txtPass, txtCheck);" modelAttribute="userDAO">
 	<label class="lbl" for="txtFirst">First Name:</label>
-	<input class="inField" type="text" class="txt" name="firstName" maxlength="50" required>
+	<input class="inField" type="text" class="txt" name="firstName"  maxlength="50" required>
 	<br><br>
 	<label class="lbl" for="txtLast">Last Name:</label>
 	<input class="inField" type="text" name="lastName" id="txtLast" maxlength="50" required>
@@ -34,7 +35,7 @@
 	<input class="inField" type="email" name="email" id="txtEmail" maxlength="35" required>
 	<br><br>
 	<label class="lbl" for="txtUser">Username:</label>
-	<input class="inField" type="text" name="username" id="txtUser" maxlength="25" required>
+	<input class="inField" type="text" name="userID" id="txtUser" maxlength="25" required>
 	<br><br>
 	<label class="lbl" for="txtPass">Password:</label>
 	<input class="inField" type="password" name="password" id="txtPass" maxlength="15" required>

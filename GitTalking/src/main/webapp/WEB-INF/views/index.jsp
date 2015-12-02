@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <html>
@@ -12,9 +13,9 @@
  <!-- Beginning of Content -->
  <body>
    <!-- Links to login and registration -->
-  <form id="userBtns" action="<%=request.getContextPath()%>/war/login.html" method="push">
+  <form id="userBtns" action="login" method="post">
 	<button class="genBtn" id="btnLogin" type="submit">LOGIN</button>
-	<button class="genBtn" id="btnSignup" type="submit" formaction="<%=request.getContextPath()%>/register.jsp">SIGNUP</button>
+	<button class="genBtn" id="btnSignup" type="submit" formaction="register">SIGNUP</button>
   </form>
   <br><br><br><br><br><br>
   <a href="http://strose.edu">

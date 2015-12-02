@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
  <head>
@@ -19,13 +20,13 @@
  </head>
  <body>
  <h1>Create an Account</h1>
- <a href="index.html"><h2 align="center">Go back</h2></a>
+ <a href="<%=request.getContextPath()%>/"><h2 align="center">Go back</h2></a>
  <p id="regNote"><strong>Fill in the needed information below. All fields are required.</strong></p>
   <hr>
   <br><br>
-  <form id="regFrm" action="tutorial.html" method="post" onsubmit="return checkPW(txtPass, txtCheck);">
+  <form id="regFrm" action="welcome" method="post" onsubmit="return checkPW(txtPass, txtCheck);" modelAttribute="userDAO">
 	<label class="lbl" for="txtFirst">First Name:</label>
-	<input class="inField" type="text" class="txt" name="firstName" maxlength="50" required>
+	<input class="inField" type="text" class="txt" name="firstName"  maxlength="50" required>
 	<br><br>
 	<label class="lbl" for="txtLast">Last Name:</label>
 	<input class="inField" type="text" name="lastName" id="txtLast" maxlength="50" required>
@@ -34,7 +35,7 @@
 	<input class="inField" type="email" name="email" id="txtEmail" maxlength="35" required>
 	<br><br>
 	<label class="lbl" for="txtUser">Username:</label>
-	<input class="inField" type="text" name="username" id="txtUser" maxlength="25" required>
+	<input class="inField" type="text" name="userID" id="txtUser" maxlength="25" required>
 	<br><br>
 	<label class="lbl" for="txtPass">Password:</label>
 	<input class="inField" type="password" name="password" id="txtPass" maxlength="15" required>

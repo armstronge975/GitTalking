@@ -55,10 +55,10 @@
   <br><br><br>
   <ul class="bottomnavbar">
 	<li class="nvbr"> <a target="_blank" href="https://github.com/armstronge975/GitTalking">Project on GitHub</a></li>
-	<li class="nvbr"> <a href="team.html">The GitTalking Team</a></li>
-	<li class="nvbr"> <a href="index.html">Back to Home Page</a></li>
-	<li class="nvbr"> <a href="about.html">About</a></li>
-	<li class="nvbr"> <a href="upcoming.html">Coming Up</a></li>
+	<li class="nvbr"> <a href="<%=request.getContextPath()%>/team">The GitTalking Team</a></li>
+	<li class="nvbr"> <a href="<%=request.getContextPath()%>/">Back to Home Page</a></li>
+	<li class="nvbr"> <a href="<%=request.getContextPath()%>/about">About</a></li>
+	<li class="nvbr"> <a href="<%=request.getContextPath()%>/upcoming">Coming Up</a></li>
   </ul>
  </body>
 </html>

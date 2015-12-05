@@ -79,12 +79,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/register", method= RequestMethod.GET)	
 	public String registerUser(Model model) {
-		System.out.println("Enter /register GET mapping");
-		/*ModelAndView model = new ModelAndView("register");
-		User userBean = new User();
-		model.addObject("user", userBean);
-		return model;
-		*/
+		System.out.println("Enter /register GET mapping");		
 		model.addAttribute("user", new User());
 		return "register";
 	
@@ -105,15 +100,8 @@ public class HomeController {
 			if(userDao.userIDAvailable(user.getUserID())) {
 				System.out.println("Creating new user");
 				System.out.println("Account type: " + user.getAccountType());
-				User newUser = new User();
-				newUser.setUserID(user.getUserID());
-				newUser.setFirstName(user.getFirstName());
-				newUser.setLastName(user.getLastName());
-				newUser.setAccountType(user.getAccountType());
-				newUser.setPassword(user.getPassword());
-				newUser.setEmail(user.getEmail());
 				// create new user
-				userDao.register(newUser);
+				userDao.register(user);
 				model.addAttribute("user", user);
 				model.addAttribute("username", user.getUserID());
 				return "tutorial";
@@ -161,5 +149,30 @@ public class HomeController {
 		System.out.println("Enter /upcoming GET mapping");
 		return "upcoming";
 		
+	}
+	
+	@RequestMapping(value = "/account", method= RequestMethod.POST)
+	public String account(@ModelAttribute User user, Model model) {
+		try {
+			//Get the Spring Context
+	        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+	         
+	        //Get the UserDAO Bean from spring.xml
+	        UserDAO userDao = ctx.getBean("userDao", UserDAO.class);
+	        
+			if(userDao.userIDAvailable(user.getUserID())) {
+				// update user
+				userDao.updateUser(user);
+				return "welcome";
+			}
+			else {			
+				System.out.println("Name already taken");
+				model.addAttribute("message", "Username already taken");
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "account";
 	}
 }

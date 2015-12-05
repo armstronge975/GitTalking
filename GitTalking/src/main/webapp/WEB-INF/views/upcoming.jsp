@@ -2,11 +2,12 @@
 <!-- A page which documents where we currently stand, and what we seek to add in the future. It also reiterates the waiting room section of the requirements doc. -->
 <html>
  <head>
-  <meta charset="utf-8">
   <title>GitTalking's Upcoming Features</title>
-  <link rel="stylesheet" type="text/css" href="styles/info.css"/>
-  <link rel="stylesheet" type="text/css" href="styles/links.css">
-  <link rel="stylesheet" type="text/css" href="styles/ui.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/info.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/links.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/ui.css">
+ <script src="<%=request.getContextPath()%>/resources/scripts/jquery.js"></script>
  </head>
  
  <!-- Beginning of Content -->
@@ -30,7 +31,7 @@
    <li> Ability to create projects via backstage calls to GitHub, and its functions. </li>
    <li> Ability to send, receive, and view private messages with other users. </li>
    <li> Ability to view and create feedback on project contributions. </li>
-   <li> Both regular and adminstrative users will have access to social and functional aspects of the site. </li>
+   <li> Both regular and administrative users will have access to social and functional aspects of the site. </li>
    <li> Although payment is on hold, admin users will be able to specify private users for testing purposes. </li>
    <li> The functionality from Facebook and GitHub will begin to take form. </li>
   </ol>
@@ -49,9 +50,9 @@
   <!-- Links, in order: GitHub repository link, meet the team, about us page, and upcoming features page.-->
   <ul class="bottomnavbar">
 	<li class="nvbr"> <a target="_blank" href="https://github.com/armstronge975/GitTalking">Project on GitHub</a></li>
-	<li class="nvbr"> <a href="team.html">The GitTalking Team</a></li>
-	<li class="nvbr"> <a href="about.html">About</a></li>
-	<li class="nvbr"> <a href="index.html">Back To Homepage</a></li>
+<li class="nvbr"> <a href="<%=request.getContextPath()%>/team">The GitTalking Team</a></li>
+	<li class="nvbr"> <a href="<%=request.getContextPath()%>/">Back to Home Page</a></li>
+	<li class="nvbr"> <a href="<%=request.getContextPath()%>/about">About</a></li>
   </ul>
  </body>
 </html>

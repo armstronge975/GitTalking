@@ -1,10 +1,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<! Doctype html>
-<html>
+<!Doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
  <head>
- <meta charset="utf-8">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/info.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/links.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/ui.css">
@@ -12,17 +12,17 @@
  <title>Welcome</title>
  </head>
  <body>
-  <h1 class="userCntrls" id="welcomeMsg">Hello, ${userID}</h1>
+  <h1 class="userCntrls" id="welcomeMsg" th:text="'Hello ' + ${user.userID}" ></h1>
   <input class="userCntrls" type="text" id="repoSearch" placeholder="Search a repository, username or full name">
   <select class="userCntrls" id="userDropMenu">
-	 <option value="" id="activeUser">${userID}</option>
+	 <option value="${userID}" id="activeUser">${userID}</option>
 	 <option class="altOps" value="timeline.html">Your Profile</option>
 	 <option class="altOps" value="messages.html">Your Private Messages</option>
 	 <option class="altOps" value="account.html">Your Account Settings</option>
-	 <option class="altOps" value="index.html">Logout</option>
+	 <option class="altOps" value="<%=request.getContextPath()%>/">Logout</option>
   </select>
   <!-- the onclick event handler below will be replaced with a proper logout script at a later date -->
-  <input class="userCntrls" type="button" id="logout" onclick="window.location.replace('index.html');" value="Logout"> 	
+  <input class="userCntrls" type="button" id="logout" onclick="window.location.replace('<%=request.getContextPath()%>/');" value="Logout"> 	
   <br><br>
   <div id="resources">
 	<h1>Other Resources</h1>

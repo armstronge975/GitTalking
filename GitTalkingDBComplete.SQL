@@ -25,9 +25,11 @@ DROP TABLE IF EXISTS `admin_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `admin_user` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(20) NOT NULL,
   `admin_firstname` varchar(45) DEFAULT NULL,
   `admin_lastname` varchar(45) DEFAULT NULL,
+  -- varbinary needed for encryption
+  `password` varbinary(45) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1008 DEFAULT CHARSET=utf8 COMMENT='Admin user with admin rights.  Links to User table.';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -38,7 +40,7 @@ CREATE TABLE `admin_user` (
 
 LOCK TABLES `admin_user` WRITE;
 /*!40000 ALTER TABLE `admin_user` DISABLE KEYS */;
-INSERT INTO `admin_user` VALUES (1001,'Emily','Armstrong'),(1002,'Richard','Connell'),(1003,'Eric','Cislo'),(1004,'Mike','Kidney'),(1005,'Paiman','Irani'),(1006,'Iain','St. John'),(1007,'Kimberly','Gero');
+INSERT INTO `admin_user` VALUES ('1001','Emily','Armstrong',AES_ENCRYPT('pikachu<3','.key.')),('1002','Richard','Connell',AES_ENCRYPT('bacon','.key.')),('1003','Eric','Cislo',AES_ENCRYPT('bacon','.key.')),(1004,'Mike','Kidney',AES_ENCRYPT('bacon','.key.')),('1005','Paiman','Irani',AES_ENCRYPT('bacon','.key.')),('1006','Iain','St. John',AES_ENCRYPT('bacon','.key.')),('1007','Kimberly','Gero',AES_ENCRYPT('bacon','.key.'));
 /*!40000 ALTER TABLE `admin_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,10 +202,12 @@ DROP TABLE IF EXISTS `standard_users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `standard_users` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(20) NOT NULL,
   `first_name` varchar(45) DEFAULT NULL,
   `last_name` varchar(45) DEFAULT NULL,
-  `permissions` varchar(45) DEFAULT NULL,
+  `account_type` varchar(7) DEFAULT NULL,
+  `email` varchar(30) DEFAULT NULL,
+  `password` varbinary(250) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9006 DEFAULT CHARSET=utf8 COMMENT='Standard users are users other than admin users.';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -214,14 +218,15 @@ CREATE TABLE `standard_users` (
 
 LOCK TABLES `standard_users` WRITE;
 /*!40000 ALTER TABLE `standard_users` DISABLE KEYS */;
-INSERT INTO `standard_users` VALUES (9001,'Greg','Baxter','r-w'),(9002,'Arrtu','Deetu','r-w'),(9003,'Jane','Rose','r-w-c'),(9004,'Tony','Tyson','r-w'),(9005,'Francine','Salter','r-w');
+INSERT INTO `standard_users` VALUES ('Greg','Greg','Baxter','public','bax@gmail.com',AES_ENCRYPT('tooObvi','.key.')),('ADeetu','Arrtu','Deetu','private','deetu@gmail.com',AES_ENCRYPT('tooObvi','.key.')),('flowers','Jane','Rose','public','jrose@yahoo.com',AES_ENCRYPT('tooObvi','.key.')),('mkyson','Tony','Tyson','public','tyson@hotmail.com',AES_ENCRYPT('tooObvi','.key.')),('fsaltz','Francine','Salter','public','fran@aol.com',AES_ENCRYPT('tooObvi','.key.'));
 /*!40000 ALTER TABLE `standard_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
 -- Table structure for table `timeline`
 --
-
+DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `messages`;
 DROP TABLE IF EXISTS `timeline`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;

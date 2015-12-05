@@ -1,8 +1,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<! Doctype html>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
  <head>
- <meta charset="utf-8">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/info.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/links.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/ui.css">
@@ -11,14 +14,14 @@
  <title>User Login</title>
  </head>
  <body>
-  <form action="welcome.html" method="post">
+  <form:form action="#" method="post" modelAttribute="user">
  	<label id="lblImg"> GitTalking </label>
 	<label class="lblLog" for="txtUsername">Username:</label>
-	<input type="text" id="txtUsername" name="username" maxlength="25" required>
+	<input type="text" id="txtUsername" name="userID" maxlength="25" required>
 	<label class="lblLog" for="txtPassword"> Password:</label>
 	<input type="password" id="txtPassword" name="password" maxlength="25" required>
 	<input type="submit" class="genBtn" value="Login">
-  </form>
+  </form:form>
   <p>GitTalking is a source control system that allows developers to collaborate within a social setting.
   Users can work on the same files, see each other's changes, like and comment on posts, and perform many other social
   tasks. Git started today!</p>

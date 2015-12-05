@@ -13,7 +13,7 @@
  <!-- Beginning of Content -->
  <body>
    <!-- Links to login and registration -->
-  <form id="userBtns" action="login" method="post">
+  <form id="userBtns" action="login" method="get">
 	<button class="genBtn" id="btnLogin" type="submit">LOGIN</button>
 	<button class="genBtn" id="btnSignup" type="submit" formaction="register">SIGNUP</button>
   </form>

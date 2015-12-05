@@ -1,8 +1,7 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!DOCTYPE html>
-<html>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<html xmlns:th="http://www.thymeleaf.org">
  <head>
- <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/info.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/links.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/ui.css">
@@ -22,23 +21,23 @@
  <h1>Create an Account</h1>
  <a href="<%=request.getContextPath()%>/"><h2 align="center">Go back</h2></a>
  <p id="regNote"><strong>Fill in the needed information below. All fields are required.</strong></p>
-  <hr>
-  <br><br>
-  <form id="regFrm" action="welcome" method="post" onsubmit="return checkPW(txtPass, txtCheck);" modelAttribute="userDAO">
+ <hr>
+ <br><br>
+ <form action="#" method="POST" th:action="tutorial" th:object="${user}" onsubmit="return checkPW(txtPass, txtCheck);">
 	<label class="lbl" for="txtFirst">First Name:</label>
-	<input class="inField" type="text" class="txt" name="firstName"  maxlength="50" required>
+	<input class="inField" type="text" class="txt" name="firstName"  maxlength="50" th:field="*{firstName}" required>
 	<br><br>
 	<label class="lbl" for="txtLast">Last Name:</label>
-	<input class="inField" type="text" name="lastName" id="txtLast" maxlength="50" required>
+	<input class="inField" type="text" name="lastName" id="txtLast" maxlength="50" th:field="*{lastName}" required>
 	<br><br>
 	<label class="lbl" for="txtEmail">Email:</label>
-	<input class="inField" type="email" name="email" id="txtEmail" maxlength="35" required>
+	<input class="inField" type="email" name="email" id="txtEmail" maxlength="35" th:field="*{email}" required>
 	<br><br>
 	<label class="lbl" for="txtUser">Username:</label>
-	<input class="inField" type="text" name="userID" id="txtUser" maxlength="25" required>
+	<input class="inField" type="text" name="userID" id="txtUser" maxlength="25" th:field="*{userID}" required>
 	<br><br>
 	<label class="lbl" for="txtPass">Password:</label>
-	<input class="inField" type="password" name="password" id="txtPass" maxlength="15" required>
+	<input class="inField" type="password" name="password" id="txtPass" maxlength="15" th:field="*{password}" required>
 	<br><br>
 	<label class="lbl" for="txtCheck">Confirm Password:</label>
 	<input class="inField" type="password" name="passwordCheck" id="txtCheck" maxlength="15" required>
@@ -46,9 +45,9 @@
 	<fieldset id="regFld">
 	  <legend class="cLbl">Select Account Type</legend>
 	  <label class="cLbl" for="radPub">Public</label>
-	  <input type="radio" name="acctType" id="radPub" checked>
+	  <input type="radio" name="accountType" id="radPub" th:field="*{accountType}" checked value="Public">
 	  <label class="cLbl" for="radPvt">Private</label>
-	  <input type="radio" name="acctType" id="radPvt">
+	  <input type="radio" name="accountType" id="radPvt" th:field="*{accountType}" value="Private">
   	</fieldset>
 	<br><br>
 	<input type="submit" class="genBtn" id="regSub" value="All done! Let's Git going!" >

@@ -2,9 +2,9 @@
 <html>
  <head>
  <meta charset="utf-8">
- <link rel="stylesheet" type="text/css" href="styles/ui.css">
- <link rel="stylesheet" type="text/css" href="styles/links.css">
- <link rel="stylesheet" type="text/css" href="styles/info.css">
+ <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/info.css">
+ <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/links.css">
+ <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/ui.css">
  <script type="text/javascript" src="scripts/jquery.js"></script>
  <title>Timeline</title>
  </head>

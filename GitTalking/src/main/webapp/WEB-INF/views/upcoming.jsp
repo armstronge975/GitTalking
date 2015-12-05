@@ -4,16 +4,16 @@
  <head>
   <meta charset="utf-8">
   <title>GitTalking's Upcoming Features</title>
-  <link rel="stylesheet" type="text/css" href="styles/info.css"/>
-  <link rel="stylesheet" type="text/css" href="styles/links.css">
-  <link rel="stylesheet" type="text/css" href="styles/ui.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/info.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/links.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/ui.css">
  </head>
  
  <!-- Beginning of Content -->
  <body>
-  <form id="userBtns" action="login.html">
+  <form id="userBtns" action="login" method="post">
 	<button class="genBtn" id="btnLogin" type="submit">Login</button>
-	<button class="genBtn" id="btnSignup" type="submit" formaction="register.html">Signup</button>
+	<button class="genBtn" id="btnSignup" type="submit" formaction="register.">Signup</button>
   </form>
   <br><br><br><br><br><br>
   <h1> Current Version : -0.01 </h1>

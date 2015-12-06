@@ -4,6 +4,7 @@ public class Message {
 	public int ID;
 	public String toUser;
 	public String fromUser;
+	public String content;
 	
 	public int getID() {
 		return ID;
@@ -27,5 +28,13 @@ public class Message {
 	
 	public void setFromUser(String from) {
 		fromUser = from;
+	}
+	
+	public String getContent() {
+		return content;
+	}
+	
+	public void setContent(String content) {
+		this.content = content;
 	}
 }

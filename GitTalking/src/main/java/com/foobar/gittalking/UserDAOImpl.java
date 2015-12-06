@@ -47,10 +47,10 @@ public class UserDAOImpl implements UserDAO {
     // update standard user when they edit their account details
     // This method uses JDBCTemplate, a spring class used to reduce the amount of code needed to run queries
     @Override
-    public void updateUser(User user) throws SQLException {
-    	String query = "UPDATE standard_users SET user_id = ?, first_name = ?, last_name = ?, account_type = ?, email = ?, password = AES_ENCRYPT(?,'.key.'))";
+    public void updateUser(User user,String oldUserID) throws SQLException {
+    	String query = "UPDATE standard_users SET user_id = ?, first_name = ?, last_name = ?, account_type = ?, email = ?, password = AES_ENCRYPT(?,'.key.') WHERE user_id = ?";
     	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        Object[] args = new Object[] {user.getUserID(), user.getFirstName(), user.getLastName(),user.getAccountType(),user.getEmail(),"'" + user.getPassword() + "'"};
+        Object[] args = new Object[] {user.getUserID(), user.getFirstName(), user.getLastName(),user.getAccountType(),user.getEmail(),user.getPassword(), oldUserID};
         jdbcTemplate.update(query, args);
     }
     

@@ -12,13 +12,14 @@
  <title>Welcome</title>
  </head>
  <body>
-  <h1 class="userCntrls" id="welcomeMsg" th:text="'Hello ' + ${user.userID}" ></h1>
+ 	<h1>${message} </h1>
+  <h1>Hello, ${username}</h1>
   <input class="userCntrls" type="text" id="repoSearch" placeholder="Search a repository, username or full name">
-  <select class="userCntrls" id="userDropMenu">
-	 <option value="${userID}" id="activeUser">${userID}</option>
-	 <option class="altOps" value="timeline.html">Your Profile</option>
-	 <option class="altOps" value="messages.html">Your Private Messages</option>
-	 <option class="altOps" value="account.html">Your Account Settings</option>
+  <select class="userCntrls" id="userDropMenu" onchange="javascript:window.location.replace(this.options[this.selectedIndex].value);">
+	 <option value="${username}" id="activeUser">${username}</option>
+	 <option class="altOps" value="<%=request.getContextPath()%>/timeline">Your Profile</option>
+	 <option class="altOps" value="<%=request.getContextPath()%>/messages">Your Private Messages</option>
+	 <option class="altOps" value="<%=request.getContextPath()%>/account">Your Account Settings</option>
 	 <option class="altOps" value="<%=request.getContextPath()%>/">Logout</option>
   </select>
   <!-- the onclick event handler below will be replaced with a proper logout script at a later date -->
@@ -26,9 +27,9 @@
   <br><br>
   <div id="resources">
 	<h1>Other Resources</h1>
-	 <a href="pullrequest.html">Pull Requests</a><br><br>
-	 <a href="timeline.html">My Timeline</a><br><br>
-	 <a href="publicrepos.html">View Public Repositories</a><br><br>					
+	 <a href="<%=request.getContextPath()%>/pullrequest">Pull Requests</a><br><br>
+	 <a href="<%=request.getContextPath()%>/timeline">My Timeline</a><br><br>
+	 <a href="<%=request.getContextPath()%>/publicrepos">View Public Repositories</a><br><br>					
 	 <a href="<%=request.getContextPath()%>/tutorial">Git Tutorial</a><br><br>
   </div>
   <h1 class="heads">Your Repositories:</h1>

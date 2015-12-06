@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Handles requests for the application home page.
  */
 @Controller
+@SessionAttributes(value={"user","oldUserID"})
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -139,7 +141,6 @@ public class HomeController {
 	
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
 	public String returnToHome(Model model) {	
-		System.out.println("Enter /welcome GET mapping");
 		return "welcome";
 		
 	}
@@ -147,32 +148,66 @@ public class HomeController {
 	@RequestMapping(value = "/upcoming", method = RequestMethod.GET)
 	public String upcoming(Model model) {
 		System.out.println("Enter /upcoming GET mapping");
-		return "upcoming";
-		
+		return "upcoming";		
+	}
+	
+	@RequestMapping(value = "/about", method = RequestMethod.GET)
+	public String about(Model model) {
+		return "about";		
+	}
+	
+	@RequestMapping(value = "/team", method = RequestMethod.GET)
+	public String team(Model model) {
+		return "team";		
+	}
+	
+	@RequestMapping(value = "/account", method = RequestMethod.GET)
+	public String accountGet(@ModelAttribute("user") User user, Model model) {
+		model.addAttribute("oldUserID",user.getUserID());
+		System.out.println(user.getUserID());
+		return "account";		
 	}
 	
 	@RequestMapping(value = "/account", method= RequestMethod.POST)
-	public String account(@ModelAttribute User user, Model model) {
+	public String account(@ModelAttribute("user")User user, @ModelAttribute("oldUserID") String oldUserID, Model model) {
 		try {
+			System.out.println(user.getUserID());
+			System.out.println(oldUserID);
 			//Get the Spring Context
 	        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 	         
 	        //Get the UserDAO Bean from spring.xml
 	        UserDAO userDao = ctx.getBean("userDao", UserDAO.class);
-	        
-			if(userDao.userIDAvailable(user.getUserID())) {
-				// update user
-				userDao.updateUser(user);
-				return "welcome";
-			}
-			else {			
-				System.out.println("Name already taken");
-				model.addAttribute("message", "Username already taken");
-			}
+	        if(!oldUserID.equals(user.getUserID())) {
+	        	if(userDao.userIDAvailable(user.getUserID())) {
+					// update user
+					userDao.updateUser(user,oldUserID);
+					model.addAttribute("message", "Account successfully updated");
+					model.addAttribute("username", user.getUserID());
+					return "welcome";
+				}
+				else {			
+					System.out.println("Name already taken");
+					model.addAttribute("message", "Username already taken");
+				}
+	        }
+	        else {
+	        	// update user
+				userDao.updateUser(user,oldUserID);
+				model.addAttribute("message", "Account successfully updated");
+				model.addAttribute("username", user.getUserID());
+				return "welcome";				
+	        }
+			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
 		return "account";
+	}
+	
+	@RequestMapping(value = "/timeline", method = RequestMethod.GET)
+	public String timeline(Model model) {
+		return "timeline";		
 	}
 }

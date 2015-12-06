@@ -16,7 +16,7 @@ public interface UserDAO {
 		public boolean accountInAdmin(String userID, String password) throws SQLException;
 		public boolean accountInStandard(String userID, String password) throws SQLException;
 		// update account details for standard users
-		public void updateUser(User user) throws SQLException;
+		public void updateUser(User user, String oldUserID) throws SQLException;
     }
     
     

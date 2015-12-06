@@ -45,9 +45,9 @@
 	<fieldset id="regFld">
 	  <legend class="cLbl">Select Account Type</legend>
 	  <label class="cLbl" for="radPub">Public</label>
-	  <input type="radio" name="accountType" id="radPub" th:field="*{accountType}" checked value="Public">
+	  <input type="radio" name="accountType" id="radPub" th:field="*{accountType}" checked value="public">
 	  <label class="cLbl" for="radPvt">Private</label>
-	  <input type="radio" name="accountType" id="radPvt" th:field="*{accountType}" value="Private">
+	  <input type="radio" name="accountType" id="radPvt" th:field="*{accountType}" value="private">
   	</fieldset>
 	<br><br>
 	<input type="submit" class="genBtn" id="regSub" value="All done! Let's Git going!" >

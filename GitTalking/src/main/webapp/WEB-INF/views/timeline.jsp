@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <! Doctype html>
 <html>
  <head>
@@ -9,15 +10,15 @@
  <title>Timeline</title>
  </head>
  <body>
- <h1 class="userCntrls" id="welcomeMsg">Hello, armstronge975!</h1>
+ <h1 class="userCntrls" id="welcomeMsg">Hello, ${username}!</h1>
  <input class="userCntrls" type="text" id="repoSearch" placeholder="Search a repository, username or full name">
- <select class="userCntrls" id="userDropMenu">
-	<option value="" id="activeUser">armstronge975</option>
-	<option class="altOps" value="timeline.html">Your Profile</option>
-	<option class="altOps" value="messages.html">Your Private Messages</option>
-	<option class="altOps" value="account.html">Your Account Settings</option>
-	<option class="altOps" value="index.html">Logout</option>
- </select>
+ <select class="userCntrls" id="userDropMenu" onchange="javascript:window.location.replace(this.options[this.selectedIndex].value);">
+	 <option value="${username}" id="activeUser">${username}</option>
+	 <option class="altOps" value="<%=request.getContextPath()%>/timeline">Your Profile</option>
+	 <option class="altOps" value="<%=request.getContextPath()%>/messages">Your Private Messages</option>
+	 <option class="altOps" value="<%=request.getContextPath()%>/account">Your Account Settings</option>
+	 <option class="altOps" value="<%=request.getContextPath()%>/">Logout</option>
+  </select>
  <!-- the onclick event handler below will be replaced with a proper logout script at a later date -->
  <input class="userCntrls" type="button" id="logout" onclick="window.location.replace('index.html');" value="Logout">
   <img src="images/minion.jpg" style="height:30%;">
@@ -26,13 +27,8 @@
   <br><br>
   <div style="display:inline-block;">
   <h3>About:</h3><br><br><br>
-  <p>Name: Emily<br>
-	Location: Albany, NY<br>
-	Occupation: Student<br>
-	Technical Interests: web design, Bootstrap, SQL<br>
-	Non-technical Interests: shopping, traveling, playing viola/piano, softball, gaming<br>
-	Talk to me about: New technologies, tourist attractions
-	</p><br><br>
+  <p>
+	${timelineContent}	</p><br><br>
   <h3>Posts:</h3><br><br>
   <p>None</p><br><br>
   <h3>Recent Activity</h3><br><br>

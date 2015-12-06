@@ -22,6 +22,7 @@
 	<input type="password" id="txtPassword" name="password" maxlength="25" required>
 	<input type="submit" class="genBtn" value="Login">
   </form:form>
+  <p style="color:red">${message}</p>>
   <p>GitTalking is a source control system that allows developers to collaborate within a social setting.
   Users can work on the same files, see each other's changes, like and comment on posts, and perform many other social
   tasks. Git started today!</p>

@@ -207,7 +207,51 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/timeline", method = RequestMethod.GET)
-	public String timeline(Model model) {
+	public String timeline(@ModelAttribute User user, Model model) throws SQLException {
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");     
+        //Get the EmployeeDAO Bean
+        UserDAO userDao = ctx.getBean("userDao", UserDAO.class);
+        TimelineDAO tlDao = ctx.getBean("timelineDao", TimelineDAO.class);
+        Timeline tl = new Timeline();
+        if(userDao.userInAdmin(user.getUserID())) {
+        	tl = tlDao.findAdminTimeline(user.getUserID());
+        }
+        else if(userDao.userInStandard(user.getUserID())) {
+        	tl = tlDao.findStandardTimeline(user.getUserID());
+        }
+        model.addAttribute("timelineContent",tl.getContent());
+        model.addAttribute("username",tl.getUserID());
 		return "timeline";		
 	}
+	
+	@RequestMapping(value = "/createrepo", method = RequestMethod.GET)
+	public String createRepo(Model model) {
+		return "createrepo";		
+	}
+	
+	@RequestMapping(value = "/pullrequest", method = RequestMethod.GET)
+	public String pullRequest(Model model) {
+		return "pullrequest";		
+	}
+	
+	@RequestMapping(value = "/collablist", method = RequestMethod.GET)
+	public String collab(Model model) {
+		return "collablist";		
+	}
+	
+	@RequestMapping(value = "/createmessage", method = RequestMethod.GET)
+	public String createMessage(Model model) {
+		return "createmessage";		
+	}
+	
+	@RequestMapping(value = "/messages", method = RequestMethod.GET)
+	public String messages(Model model) {
+		return "messages";		
+	}
+	
+	@RequestMapping(value = "/publicrepos", method = RequestMethod.GET)
+	public String publicRepos(Model model) {
+		return "publicRepos";		
+	}
+
 }

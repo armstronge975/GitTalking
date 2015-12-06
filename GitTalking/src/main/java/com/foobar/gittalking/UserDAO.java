@@ -12,6 +12,8 @@ public interface UserDAO {
 		// user login
 		public User login(String userID, String password);
 		// authenticate credentials during login
+		public boolean userInStandard(String userID) throws SQLException;
+		public boolean userInAdmin(String userID) throws SQLException;
 		public boolean accountExists(String userID, String password) throws SQLException;
 		public boolean accountInAdmin(String userID, String password) throws SQLException;
 		public boolean accountInStandard(String userID, String password) throws SQLException;

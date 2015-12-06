@@ -38,7 +38,7 @@
   </ol>
   <img id="welcomeImg" src="<%=request.getContextPath()%>/resources/images/knight7.jpg" alt="Photo not found">
   <!-- the onclick event handler below will be replaced with a proper create repo script at a later date -->
-  <form action="createrepo.html">
+  <form action="createrepo" method="GET">
    <input class="genBtn" id="btnAddRepo" type="submit" value="Create Repository"/>
   </form>
   <br><br>

@@ -25,37 +25,37 @@
   <div class="devTeam">
    <h3> Emily "Strong-Arm" Armstrong</h3>
    <br>
-   <img src="images/knight1.jpg" alt="Oops. No image here. Move along." id="teamPic">
+   <img src="<%=request.getContextPath()%>/resources/images/knight1.jpg" alt="Oops. No image here. Move along." id="teamPic">
   </div>
   
   <div class="devTeam">
    <h3> Eric "Cisco Tamer" Cislo </h3>
    <br>
-   <img src="images/knight3.jpg" alt="Oops. No image here. Move along." id="teamPic">
+   <img src="<%=request.getContextPath()%>/resources/images/knight3.jpg" alt="Oops. No image here. Move along." id="teamPic">
   </div>
   
   <div class="devTeam">
    <h3> Iain "That Guy" St. John </h3>
    <br>
-   <img src="images/knight6.jpg" alt="Oops. No image here. Move along." id="teamPic">
+   <img src="<%=request.getContextPath()%>/resources/images/knight6.jpg" alt="Oops. No image here. Move along." id="teamPic">
   </div>
   
   <div class="devTeam">
    <h3> Irani "Impervious to Wordplay" Paiman </h3>
    <br>
-   <img src="images/knight2.jpg" alt="Oops. No image here. Move along." id="teamPic">
+   <img src="<%=request.getContextPath()%>/resources/images/knight2.jpg" alt="Oops. No image here. Move along." id="teamPic">
   </div>
   
   <div class="devTeam">
    <h3> Michael "Jejunum" Kidney </h3>
    <br>
-   <img src="images/knight4.jpg" alt="Oops. No image here. Move along." id="teamPic">
+   <img src="<%=request.getContextPath()%>/resources/images/knight4.jpg" alt="Oops. No image here. Move along." id="teamPic">
   </div>
   
   <div class="devTeam">
    <h3> Richard "Colonel Rick" Connell </h3>
    <br>
-   <img src="images/knight5.jpg" alt="Oops. No image here. Move along." id="teamPic">
+   <img src="<%=request.getContextPath()%>/resources/images/knight5.jpg" alt="Oops. No image here. Move along." id="teamPic">
   </div>
   <br><br><br><br>
   

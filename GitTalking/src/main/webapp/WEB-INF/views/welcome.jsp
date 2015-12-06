@@ -15,8 +15,9 @@
   <h1 class="userCntrls" id="welcomeMsg" th:text="'Hello ' + ${user.userID}" ></h1>
   <input class="userCntrls" type="text" id="repoSearch" placeholder="Search a repository, username or full name">
   <select class="userCntrls" id="userDropMenu">
-	 <option value="${userID}" id="activeUser">${userID}</option>
-	 <option class="altOps" value="timeline.html">Your Profile</option>
+	 <option value="${userID}" id="activeUser">${username}</option>
+	  <option class="altOps" value="timeline.html">Your Profile</option> 
+	 <!-- started by Rich C<option class="altOps" value="<%=request.getContextPath()%>/">Your Profile</option> -->
 	 <option class="altOps" value="messages.html">Your Private Messages</option>
 	 <option class="altOps" value="account.html">Your Account Settings</option>
 	 <option class="altOps" value="<%=request.getContextPath()%>/">Logout</option>
@@ -26,9 +27,10 @@
   <br><br>
   <div id="resources">
 	<h1>Other Resources</h1>
-	 <a href="pullrequest.html">Pull Requests</a><br><br>
-	 <a href="timeline.html">My Timeline</a><br><br>
-	 <a href="publicrepos.html">View Public Repositories</a><br><br>					
+	 <a href="<%=request.getContextPath()%>/pullrequest">Pull Requests</a><br><br>
+	 <a href="<%=request.getContextPath()%>/timeline">My Timeline</a><br><br>
+	 <!--  <a href="publicrepos.html">View Public Repositories</a><br><br> -->
+	 <a href="<%=request.getContextPath()%>/viewpublicrepository">View Public Repositories</a><br><br>					
 	 <a href="<%=request.getContextPath()%>/tutorial">Git Tutorial</a><br><br>
   </div>
   <h1 class="heads">Your Repositories:</h1>

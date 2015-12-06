@@ -130,12 +130,90 @@ public class HomeController {
 		model.addAttribute("user", user);
         return "tutorial";
     }
+	
+	@RequestMapping(value = "/viewpublicrepository", method = RequestMethod.GET)
+   public String loginvpr(Locale locale, Model model) {
+		System.out.println("Enter /viewpublicrepository GET mapping");		
+        return "viewpublicrepository";
+    }
+	
+	@RequestMapping(value = "/viewpublicrepository", method = RequestMethod.POST)
+   public String viewpublicrepository(@ModelAttribute User user, Model model) {
+	System.out.println("Enter /viewpublicrepository POST mapping");
+	model.addAttribute("user", user);
+    return "viewpublicrepository";
+   }
+	
+	@RequestMapping(value = "/timeline", method = RequestMethod.GET)
+	   public String logintline(Locale locale, Model model) {
+			System.out.println("Enter /timeline GET mapping");		
+	        return "timeline";
+	    }
+		
+		@RequestMapping(value = "/timeline", method = RequestMethod.POST)
+	   public String timeline(@ModelAttribute User user, Model model) {
+		System.out.println("Enter /timeline POST mapping");
+		model.addAttribute("user", user);
+	    return "timeline";
+	   }
+
+
+	@RequestMapping(value = "/pullrequest", method = RequestMethod.GET)
+	   public String loginpullrequest(Locale locale, Model model) {
+			System.out.println("Enter /pullrequest GET mapping");		
+	        return "pullrequest";
+	    }
+		
+		@RequestMapping(value = "/pullrequest", method = RequestMethod.POST)
+	   public String pullrequest(@ModelAttribute User user, Model model) {
+		System.out.println("Enter /pullrequest POST mapping");
+		model.addAttribute("user", user);
+	    return "pullrequest";
+	   }	
+	
+	
 	@RequestMapping(value = "/welcome", method = RequestMethod.POST)
 	public String welcome(@ModelAttribute User user, Model model) {	
 		model.addAttribute("userId", user.getUserID());
 		System.out.println("Enter /welcome POST mapping");
 		return "welcome";
 	}
+	//Added by Rich C.
+	@RequestMapping(value = "/yourPRofile", method= RequestMethod.GET)
+	public String goToLoginProfile(Model model) {
+		System.out.println("Enter /login GET mapping");
+		model.addAttribute("user", new User());
+		return "yourPRofile";
+	}
+	
+	@RequestMapping(value = "/team", method = RequestMethod.GET)
+	   public String loginteam(Locale locale, Model model) {
+			System.out.println("Enter /team GET mapping");		
+	        return "team";
+	    }
+		
+		@RequestMapping(value = "/team", method = RequestMethod.POST)
+	   public String team(@ModelAttribute User user, Model model) {
+		System.out.println("Enter /team POST mapping");
+		model.addAttribute("user", user);
+	    return "team";
+	   }
+
+
+	@RequestMapping(value = "/about", method = RequestMethod.GET)
+	   public String loginabout(Locale locale, Model model) {
+			System.out.println("Enter /about GET mapping");		
+	        return "about";
+	    }
+		
+		@RequestMapping(value = "/about", method = RequestMethod.POST)
+	   public String about(@ModelAttribute User user, Model model) {
+		System.out.println("Enter /about POST mapping");
+		model.addAttribute("user", user);
+	    return "about";
+	   }
+	
+	
 	
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
 	public String returnToHome(Model model) {	

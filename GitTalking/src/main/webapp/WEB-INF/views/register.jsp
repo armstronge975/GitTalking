@@ -19,6 +19,7 @@
  </head>
  <body>
  <h1>Create an Account</h1>
+ <h1>${message}</h1>
  <a href="<%=request.getContextPath()%>/"><h2 align="center">Go back</h2></a>
  <p id="regNote"><strong>Fill in the needed information below. All fields are required.</strong></p>
  <hr>

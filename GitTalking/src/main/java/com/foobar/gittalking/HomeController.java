@@ -132,12 +132,7 @@ public class HomeController {
 		model.addAttribute("user", user);
         return "tutorial";
     }
-	@RequestMapping(value = "/welcome", method = RequestMethod.POST)
-	public String welcome(@ModelAttribute User user, Model model) {	
-		model.addAttribute("userId", user.getUserID());
-		System.out.println("Enter /welcome POST mapping");
-		return "welcome";
-	}
+	
 	
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
 	public String returnToHome(Model model) {	
@@ -228,6 +223,9 @@ public class HomeController {
 	public String createRepo(Model model) {
 		return "createrepo";		
 	}
+	
+	
+	
 	
 	@RequestMapping(value = "/pullrequest", method = RequestMethod.GET)
 	public String pullRequest(Model model) {

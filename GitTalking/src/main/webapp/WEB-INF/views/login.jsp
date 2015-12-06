@@ -28,7 +28,7 @@
   tasks. Git started today!</p>
   <img src="<%=request.getContextPath()%>/resources/images/login.jpg" alt="Photo not found." id="loginPic">
   <hr>
-  <ul class="bottomnavbar">
+ <ul class="bottomnavbar">
 	<li class="nvbr"> <a target="_blank" href="https://github.com/armstronge975/GitTalking">Project on GitHub</a></li>
 	<li class="nvbr"> <a href="<%=request.getContextPath()%>/team">The GitTalking Team</a></li>
 	<li class="nvbr"> <a href="<%=request.getContextPath()%>/">Back to Home Page</a></li>

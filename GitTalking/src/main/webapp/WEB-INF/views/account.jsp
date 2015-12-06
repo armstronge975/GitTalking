@@ -59,7 +59,6 @@
 	<br><br>
 	<input type="submit" class="genBtn" id="regSub" value="Save Settings"/>
   </form:form>
-  <br><br><br>
   <ul class="bottomnavbar">
 	<li class="nvbr"> <a target="_blank" href="https://github.com/armstronge975/GitTalking">Project on GitHub</a></li>
 	<li class="nvbr"> <a href="<%=request.getContextPath()%>/team">The GitTalking Team</a></li>

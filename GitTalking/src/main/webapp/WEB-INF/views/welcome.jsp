@@ -12,8 +12,12 @@
  <title>Welcome</title>
  </head>
  <body>
+ 
+
+
  	<h1>${message} </h1>
   <h1>Hello, ${username}</h1>
+ 
   <input class="userCntrls" type="text" id="repoSearch" placeholder="Search a repository, username or full name">
   <select class="userCntrls" id="userDropMenu" onchange="javascript:window.location.replace(this.options[this.selectedIndex].value);">
 	 <option value="${username}" id="activeUser">${username}</option>
@@ -50,8 +54,8 @@
   <hr>
   <ul class="bottomnavbar">
 	<li class="nvbr"> <a target="_blank" href="https://github.com/armstronge975/GitTalking">Project on GitHub</a></li>
-<li class="nvbr"> <a href="<%=request.getContextPath()%>/team">The GitTalking Team</a></li>
-	<li class="nvbr"> <a href="<%=request.getContextPath()%>/">Back to Home Page</a></li>
+	<li class="nvbr"> <a href="<%=request.getContextPath()%>/team">The GitTalking Team</a></li>
+	<li class="nvbr"> <a href="<%=request.getContextPath()%>/welcome">Back to Home Page</a></li>
 	<li class="nvbr"> <a href="<%=request.getContextPath()%>/about">About</a></li>
 	<li class="nvbr"> <a href="<%=request.getContextPath()%>/upcoming">Coming Up</a></li>
   </ul>

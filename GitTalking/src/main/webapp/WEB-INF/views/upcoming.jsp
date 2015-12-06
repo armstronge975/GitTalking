@@ -48,11 +48,12 @@
   <hr>
   <!-- Links to other pages in Horizontal NavBar.--> 
   <!-- Links, in order: GitHub repository link, meet the team, about us page, and upcoming features page.-->
-  <ul class="bottomnavbar">
+ <ul class="bottomnavbar">
 	<li class="nvbr"> <a target="_blank" href="https://github.com/armstronge975/GitTalking">Project on GitHub</a></li>
-<li class="nvbr"> <a href="<%=request.getContextPath()%>/team">The GitTalking Team</a></li>
+	<li class="nvbr"> <a href="<%=request.getContextPath()%>/team">The GitTalking Team</a></li>
 	<li class="nvbr"> <a href="<%=request.getContextPath()%>/">Back to Home Page</a></li>
 	<li class="nvbr"> <a href="<%=request.getContextPath()%>/about">About</a></li>
+	
   </ul>
  </body>
 </html>

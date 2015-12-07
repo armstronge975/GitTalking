@@ -5,6 +5,7 @@
  * data you sent from a previous page UNLESS you use ModelAttributes. ModelAttributes are basically variables of a model that are only available to the 
  * next available mapping or JSP file you go to. Use model.AddAttribute("varName","value) to send data to your JSP page.
  * Use ctx to get beans specified in spring.xml. This will allow you to connect to the database. Call your DAOImpl methods here to query the database.
+ * Make sure that each page has no more than 2 request mappings (1 for GET, 1 for POST)
  */
 
 package com.foobar.gittalking;

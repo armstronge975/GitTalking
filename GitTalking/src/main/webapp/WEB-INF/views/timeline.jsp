@@ -3,11 +3,19 @@
 <! Doctype html>
 <html>
  <head>
+<<<<<<< HEAD
+ <meta charset="utf-8">
+ <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/info.css">
+ <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/links.css">
+ <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/ui.css">
+ <script type="text/javascript" src="scripts/jquery.js"></script>
+=======
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/info.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/links.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/ui.css">
  <script src="<%=request.getContextPath()%>/resources/scripts/jquery.js"></script>
+>>>>>>> branch 'master' of https://github.com/armstronge975/GitTalking.git
  <title>Timeline</title>
  </head>
  <body>
@@ -44,7 +52,7 @@
   </c:forEach>
   </div>
     <hr>
-  <ul class="bottomnavbar">
+  <<ul class="bottomnavbar">
 	<li class="nvbr"> <a target="_blank" href="https://github.com/armstronge975/GitTalking">Project on GitHub</a></li>
 	<li class="nvbr"> <a href="<%=request.getContextPath()%>/team">The GitTalking Team</a></li>
 	<li class="nvbr"> <a href="<%=request.getContextPath()%>/">Back to Home Page</a></li>

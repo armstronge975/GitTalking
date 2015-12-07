@@ -148,6 +148,11 @@ public class HomeController {
 	   public String pullrequest(@ModelAttribute User user, Model model) {
 		System.out.println("Enter /pullrequest POST mapping");
 		model.addAttribute("user", user);
+<<<<<<< HEAD
+        return "tutorial";
+    }
+	
+======
 	    return "pullrequest";
 	   }	
 	
@@ -158,6 +163,7 @@ public class HomeController {
 		System.out.println("Enter /welcome POST mapping");
 		return "welcome";
 	}
+>>>>>>> branch 'master' of https://github.com/armstronge975/GitTalking
 	
 	@RequestMapping(value = "/team", method = RequestMethod.GET)
 	   public String loginteam(Locale locale, Model model) {
@@ -284,6 +290,17 @@ public class HomeController {
 	@RequestMapping(value = "/createrepo", method = RequestMethod.GET)
 	public String createRepo(Model model) {
 		return "createrepo";		
+<<<<<<< HEAD
+	}
+	
+	
+	
+	
+	@RequestMapping(value = "/pullrequest", method = RequestMethod.GET)
+	public String pullRequest(Model model) {
+		return "pullrequest";		
+=======
+>>>>>>> branch 'master' of https://github.com/armstronge975/GitTalking
 	}
 	
 	@RequestMapping(value = "/collablist", method = RequestMethod.GET)

@@ -3,18 +3,24 @@
 <html>
  <head>
   <title>GitTalking's Upcoming Features</title>
+<<<<<<< HEAD
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/info.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/links.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/ui.css">
+=======
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/info.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/links.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/ui.css">
  <script src="<%=request.getContextPath()%>/resources/scripts/jquery.js"></script>
+>>>>>>> branch 'master' of https://github.com/armstronge975/GitTalking.git
  </head>
  
  <!-- Beginning of Content -->
  <body>
-  <form id="userBtns" action="login.html">
+  <form id="userBtns" action="login" method="post">
 	<button class="genBtn" id="btnLogin" type="submit">Login</button>
-	<button class="genBtn" id="btnSignup" type="submit" formaction="register.html">Signup</button>
+	<button class="genBtn" id="btnSignup" type="submit" formaction="register.">Signup</button>
   </form>
   <br><br><br><br><br><br>
   <h1> Current Version : -0.01 </h1>
@@ -48,11 +54,12 @@
   <hr>
   <!-- Links to other pages in Horizontal NavBar.--> 
   <!-- Links, in order: GitHub repository link, meet the team, about us page, and upcoming features page.-->
-  <ul class="bottomnavbar">
+ <ul class="bottomnavbar">
 	<li class="nvbr"> <a target="_blank" href="https://github.com/armstronge975/GitTalking">Project on GitHub</a></li>
-<li class="nvbr"> <a href="<%=request.getContextPath()%>/team">The GitTalking Team</a></li>
+	<li class="nvbr"> <a href="<%=request.getContextPath()%>/team">The GitTalking Team</a></li>
 	<li class="nvbr"> <a href="<%=request.getContextPath()%>/">Back to Home Page</a></li>
 	<li class="nvbr"> <a href="<%=request.getContextPath()%>/about">About</a></li>
+	
   </ul>
  </body>
 </html>

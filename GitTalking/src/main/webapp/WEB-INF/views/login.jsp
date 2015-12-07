@@ -22,12 +22,13 @@
 	<input type="password" id="txtPassword" name="password" maxlength="25" required>
 	<input type="submit" class="genBtn" value="Login">
   </form:form>
+  <p style="color:red">${message}</p>>
   <p>GitTalking is a source control system that allows developers to collaborate within a social setting.
   Users can work on the same files, see each other's changes, like and comment on posts, and perform many other social
   tasks. Git started today!</p>
   <img src="<%=request.getContextPath()%>/resources/images/login.jpg" alt="Photo not found." id="loginPic">
   <hr>
-  <ul class="bottomnavbar">
+ <ul class="bottomnavbar">
 	<li class="nvbr"> <a target="_blank" href="https://github.com/armstronge975/GitTalking">Project on GitHub</a></li>
 	<li class="nvbr"> <a href="<%=request.getContextPath()%>/team">The GitTalking Team</a></li>
 	<li class="nvbr"> <a href="<%=request.getContextPath()%>/">Back to Home Page</a></li>

@@ -34,7 +34,7 @@
 		<span style="width:10%;">Repository Type:  </span>
 		<span>Public<form:radiobutton checked="checked" style="width: 69px" name="account" path="type" />Private</span><form:radiobutton style="width: 104px" name="account" path="type" /><br>
 		<span>Create Readme File   </span><input type="checkbox" checked><br>
-		<span>Enter the names of collaborators:</span><br>
+		<span>Enter the names of collaborators (separate each name with a space):</span><br>
 		<textarea wrap="hard" rows="4"></textarea>
   	</span><br><br><br>
   	<input type="submit" class="button" value="Create Repository" style="position: relative;left:45%;">

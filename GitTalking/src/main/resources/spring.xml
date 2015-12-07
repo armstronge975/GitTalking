@@ -3,11 +3,16 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
      
+     <!-- Beans used to connect to database and to use data from all Java bean classes -->
      <bean id="userDao" class="com.foobar.gittalking.UserDAOImpl">
      	<property name="dataSource" ref="dataSource" />
      </bean>
      
      <bean id="timelineDao" class="com.foobar.gittalking.TimelineDAOImpl">
+     	<property name="dataSource" ref="dataSource" />
+     </bean>
+     
+     <bean id="messageDao" class="com.foobar.gittalking.MessageDAOImpl">
      	<property name="dataSource" ref="dataSource" />
      </bean>
      

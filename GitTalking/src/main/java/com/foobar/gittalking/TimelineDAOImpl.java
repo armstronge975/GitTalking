@@ -62,4 +62,12 @@ public class TimelineDAOImpl implements TimelineDAO {
                }}); 
         return timeline;
 	}
+	
+	@Override
+    public void updateTimeline(String content,String userID) throws SQLException {
+    	String query = "UPDATE timeline SET timeline_content = ? WHERE user_id = ?";
+    	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        Object[] args = new Object[] {content, userID};
+        jdbcTemplate.update(query, args);
+    }
 }

@@ -18,9 +18,9 @@
 	<button class="genBtn" id="btnSignup" type="submit" formaction="register.html">Signup</button>
   </form>
   <br><br><br><br><br><br>
-  <h1>Meet the GitTalking Development Team!
+  <h1>Meet the GitTalking Development Team! </h1>
    <h2> (and the founding members of FOOBAR Inc.) </h2>
-  </h1>
+ 
   
   <div class="devTeam">
    <h3> Emily "Strong-Arm" Armstrong</h3>

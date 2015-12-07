@@ -28,7 +28,8 @@ CREATE TABLE `admin_user` (
   `user_id` varchar(20) NOT NULL,
   `admin_firstname` varchar(45) DEFAULT NULL,
   `admin_lastname` varchar(45) DEFAULT NULL,
-  `password` varchar(45) DEFAULT NULL,
+  -- varbinary needed for encryption
+  `password` varbinary(250) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1008 DEFAULT CHARSET=utf8 COMMENT='Admin user with admin rights.  Links to User table.';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -129,8 +130,15 @@ DROP TABLE IF EXISTS `private_message`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `private_message` (
   `priv_id` int(11) NOT NULL,
+  `to_user` varchar(45) DEFAULT NULL,
+  `from_user` varchar(45) DEFAULT NULL,
+  `dateSent` timestamp,
   `private_messagecontent` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`priv_id`)
+  PRIMARY KEY (`priv_id`),
+  FOREIGN KEY (`to_user`) REFERENCES `standard_users`(`user_id`),
+  FOREIGN KEY (`to_user`) REFERENCES `admin_user`(`user_id`),
+  FOREIGN KEY (`from_user`) REFERENCES `admin_user`(`user_id`),
+  FOREIGN KEY (`from_user`) REFERENCES `standard_users`(`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='stored the private message content.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -140,7 +148,7 @@ CREATE TABLE `private_message` (
 
 LOCK TABLES `private_message` WRITE;
 /*!40000 ALTER TABLE `private_message` DISABLE KEYS */;
-INSERT INTO `private_message` VALUES (7001,'I dont thing we can do what the client asked');
+INSERT INTO `private_message` VALUES (7001, '1001', 'flowers', TIMESTAMP(NOW()), 'I dont thing we can do what the client asked');
 /*!40000 ALTER TABLE `private_message` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,8 +186,17 @@ DROP TABLE IF EXISTS `public_message`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `public_message` (
   `pub_id` int(11) NOT NULL,
-  `public_messagecontent` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`pub_id`)
+  `public_messagecontent` varchar(300) DEFAULT NULL,
+  `to_user` varchar(300) DEFAULT NULL,
+  `from_user` varchar(300) DEFAULT NULL,
+  `time_sent` TIMESTAMP NOT NULL DEFAULT NOW(),
+  `likes` INT DEFAULT 0,
+  `comments` INT DEFAULT 0,
+   PRIMARY KEY (`pub_id`),
+   FOREIGN KEY (`to_user`) REFERENCES `admin_user`(`user_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`to_user`) REFERENCES `standard_users`(`user_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`from_user`) REFERENCES `admin_user`(`user_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`from_user`) REFERENCES `standard_users`(`user_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='publick message content';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -189,7 +206,8 @@ CREATE TABLE `public_message` (
 
 LOCK TABLES `public_message` WRITE;
 /*!40000 ALTER TABLE `public_message` DISABLE KEYS */;
-INSERT INTO `public_message` VALUES (8001,'Lets get started everyone!');
+INSERT INTO `public_message` VALUES (8001,'Lets get started everyone!','1002','1003',NOW(),0,0);
+INSERT INTO `public_message` VALUES (8002,'Leggo!','1002','1005',NOW(),0,0);
 /*!40000 ALTER TABLE `public_message` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -206,7 +224,7 @@ CREATE TABLE `standard_users` (
   `last_name` varchar(45) DEFAULT NULL,
   `account_type` varchar(7) DEFAULT NULL,
   `email` varchar(30) DEFAULT NULL,
-  `password` varchar(45) DEFAULT NULL,
+  `password` varbinary(250) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9006 DEFAULT CHARSET=utf8 COMMENT='Standard users are users other than admin users.';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -232,7 +250,10 @@ DROP TABLE IF EXISTS `timeline`;
 CREATE TABLE `timeline` (
   `timeline_id` int(11) NOT NULL,
   `timeline_content` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`timeline_id`)
+  `user_id` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`timeline_id`),
+  FOREIGN KEY (`user_id`) REFERENCES `admin_user`(`user_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`user_id`) REFERENCES `standard_users`(`user_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Social tmeline content';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -242,7 +263,7 @@ CREATE TABLE `timeline` (
 
 LOCK TABLES `timeline` WRITE;
 /*!40000 ALTER TABLE `timeline` DISABLE KEYS */;
-INSERT INTO `timeline` VALUES (10001,'Welcome to GitTalking'),(10002,'Lets Get started'),(10003,'Please feel free to post on the timeline now');
+INSERT INTO `timeline` VALUES (10001,'Welcome to GitTalking','1001'),(10002,'Lets Get started','1002'),(10003,'Please feel free to post on the timeline now','1003');
 /*!40000 ALTER TABLE `timeline` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

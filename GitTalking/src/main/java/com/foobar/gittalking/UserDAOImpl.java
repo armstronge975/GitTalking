@@ -37,7 +37,7 @@ public class UserDAOImpl implements UserDAO {
          	pstmt.setString(3, user.getLastName());
          	pstmt.setString(4, user.getAccountType());
          	pstmt.setString(5, user.getEmail());
-         	pstmt.setString(6, "'" + user.getPassword() + "'");
+         	pstmt.setString(6, user.getPassword());
          	
          	int result = pstmt.executeUpdate();
          	if(result != 0) 
@@ -47,10 +47,10 @@ public class UserDAOImpl implements UserDAO {
     // update standard user when they edit their account details
     // This method uses JDBCTemplate, a spring class used to reduce the amount of code needed to run queries
     @Override
-    public void updateUser(User user) throws SQLException {
-    	String query = "UPDATE standard_users SET user_id = ?, first_name = ?, last_name = ?, account_type = ?, email = ?, password = AES_ENCRYPT(?,'.key.'))";
+    public void updateUser(User user,String oldUserID) throws SQLException {
+    	String query = "UPDATE standard_users SET user_id = ?, first_name = ?, last_name = ?, account_type = ?, email = ?, password = AES_ENCRYPT(?,'.key.') WHERE user_id = ?";
     	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        Object[] args = new Object[] {user.getUserID(), user.getFirstName(), user.getLastName(),user.getAccountType(),user.getEmail(),"'" + user.getPassword() + "'"};
+        Object[] args = new Object[] {user.getUserID(), user.getFirstName(), user.getLastName(),user.getAccountType(),user.getEmail(),user.getPassword(),oldUserID};
         jdbcTemplate.update(query, args);
     }
     
@@ -63,6 +63,26 @@ public class UserDAOImpl implements UserDAO {
     	pstmt.setString(2, userID);
     	ResultSet resultSet = pstmt.executeQuery();
     	return (resultSet.next() && resultSet.getInt(1) == 0);
+    }
+    
+ // check if userID available in admin_user
+    @Override
+    public boolean userInAdmin(String userID) throws SQLException {
+    	String query = "SELECT count(*) from admin_user WHERE user_id = ?";
+    	PreparedStatement pstmt = dataSource.getConnection().prepareStatement(query);
+    	pstmt.setString(1, userID);  	
+    	ResultSet resultSet = pstmt.executeQuery();
+    	return (resultSet.next() && resultSet.getInt(1) == 1);
+    }
+    
+ // check if userID available in standard_users
+    @Override
+    public boolean userInStandard(String userID) throws SQLException {
+    	String query = "SELECT count(*) from standard_users WHERE user_id = ?";
+    	PreparedStatement pstmt = dataSource.getConnection().prepareStatement(query);
+    	pstmt.setString(1, userID);  	
+    	ResultSet resultSet = pstmt.executeQuery();
+    	return (resultSet.next() && resultSet.getInt(1) == 1);
     }
     
     // This method uses JDBCTemplate, a spring class used to reduce the amount of code needed to run queries

@@ -3,6 +3,7 @@ package com.foobar.gittalking;
 public class Timeline {
 	public int ID;
 	public String content;
+	public String userID;
 	
 	public int getID() {
 		return ID;
@@ -18,5 +19,13 @@ public class Timeline {
 	
 	public void setContent(String c) {
 		content = c;
+	}
+	
+	public String getUserID() {
+		return userID;
+	}
+	
+	public void setUserID(String user) {
+		userID = user;
 	}
 }

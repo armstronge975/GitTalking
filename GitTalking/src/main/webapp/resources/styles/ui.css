@@ -197,3 +197,10 @@
 
 /* User Timeline page */
 /*--------------------------------------------------*/
+.centered {
+	.float_center {
+  float: right;
+  position: relative;
+  right: 50%; 
+  text-align: left;
+}

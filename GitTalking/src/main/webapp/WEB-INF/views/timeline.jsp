@@ -20,19 +20,20 @@
 	 <option class="altOps" value="<%=request.getContextPath()%>/">Logout</option>
   </select>
  <!-- the onclick event handler below will be replaced with a proper logout script at a later date -->
- <input class="userCntrls" type="button" id="logout" onclick="window.location.replace('index.html');" value="Logout">
-  <img src="images/minion.jpg" style="height:30%;">
+ <input class="userCntrls" type="button" id="logout" onclick="window.location.replace('index.html');" value="Logout"><br><br>
+   <h1 class="userCntrls" style="color:green">${message}</h1>
   <!-- Links to other pages in Horizontal NavBar.--> 
   <!-- Links, in order: GitHub repository link, meet the team, about us page, and upcoming features page.-->
   <br><br>
   <div style="display:inline-block;">
   <h3>About:</h3><br><br><br>
-  <p>
-	${timelineContent}	</p><br><br>
-  <h3>Posts:</h3><br><br>
-  <p>None</p><br><br>
-  <h3>Recent Activity</h3><br><br>
-  <p>None...yet.</p>
+  <p>${timelineContent}	</p>
+  <form:form method="POST" action="#" name="frmEdit" modelAttribute="timeline">
+  <p class="centered">Edit your About section:</p><br>
+  <form:input path="content" value="${timelineContent}"/>
+  <br><br>
+  <input type="submit" class="genBtn" value="Edit Information"/>
+  </form:form>
   </div>
   <br><br>
     <hr>

@@ -208,8 +208,9 @@ public class HomeController {
 	
 	@RequestMapping(value = "/timeline", method = RequestMethod.GET)
 	public String timeline(@ModelAttribute User user, Model model) throws SQLException {
+		// get database connection
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");     
-        //Get the EmployeeDAO Bean
+        //Get the Beans from spring.xml
         UserDAO userDao = ctx.getBean("userDao", UserDAO.class);
         TimelineDAO tlDao = ctx.getBean("timelineDao", TimelineDAO.class);
         Timeline tl = new Timeline();
@@ -219,9 +220,22 @@ public class HomeController {
         else if(userDao.userInStandard(user.getUserID())) {
         	tl = tlDao.findStandardTimeline(user.getUserID());
         }
+        model.addAttribute("timeline", new Timeline());
         model.addAttribute("timelineContent",tl.getContent());
         model.addAttribute("username",tl.getUserID());
 		return "timeline";		
+	}
+	
+	@RequestMapping(value = "/timeline", method = RequestMethod.POST)
+	public String timelinePost(@ModelAttribute("timeline") Timeline timeline,@ModelAttribute User user, Model model) throws SQLException {
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+		TimelineDAO tlDao = ctx.getBean("timelineDao", TimelineDAO.class);
+		tlDao.updateTimeline(timeline.getContent(), user.getUserID());
+		model.addAttribute("timeline", new Timeline());
+        model.addAttribute("timelineContent",timeline.getContent());
+		model.addAttribute("username",user.getUserID());
+		model.addAttribute("message", "Profile Succfully Updated");		
+		return "timeline";
 	}
 	
 	@RequestMapping(value = "/createrepo", method = RequestMethod.GET)

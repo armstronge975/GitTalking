@@ -1,11 +1,11 @@
 <! Doctype html>
 <html>
  <head>
- <meta charset="utf-8">
- <link rel="stylesheet" type="text/css" href="styles/ui.css">
- <link rel="stylesheet" type="text/css" href="styles/links.css">
- <link rel="stylesheet" type="text/css" href="styles/info.css">
- <script type="text/javascript" src="scripts/jquery.js"></script>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/info.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/links.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/ui.css">
+ <script src="<%=request.getContextPath()%>/resources/scripts/jquery.js"></script>
  <title>Hello World Repository</title>
  </head>
  <body>

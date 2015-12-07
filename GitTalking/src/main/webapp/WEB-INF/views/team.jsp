@@ -2,11 +2,13 @@
 <!-- A page which identifies all members participating in the developments of GitTalking -->
 <html>
  <head>
-  <meta charset="utf-8">
+  
   <title>GitTalking Team</title>
-  <link rel="stylesheet" type="text/css" href="styles/info.css"/>
-  <link rel="stylesheet" type="text/css" href="styles/links.css">
-  <link rel="stylesheet" type="text/css" href="styles/ui.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/info.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/links.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/styles/ui.css">
+ <script src="<%=request.getContextPath()%>/resources/scripts/jquery.js"></script>
  </head>
  
  <!-- Beginning of Content -->
@@ -63,9 +65,9 @@
   <!-- Links, in order: GitHub repository link, meet the team, about us page, and upcoming features page.-->
   <ul class="bottomnavbar">
 	<li class="nvbr"> <a target="_blank" href="https://github.com/armstronge975/GitTalking">Project on GitHub</a></li>
-	<li class="nvbr"> <a href="index.html">Back to Home Page</a></li>
-	<li class="nvbr"> <a href="about.html">About</a></li>
-	<li class="nvbr"> <a href="upcoming.html">Coming Up</a></li>
+	<li class="nvbr"> <a href="<%=request.getContextPath()%>/">Back to Home Page</a></li>
+	<li class="nvbr"> <a href="<%=request.getContextPath()%>/about">About</a></li>
+	<li class="nvbr"> <a href="<%=request.getContextPath()%>/upcoming">Coming Up</a></li>
   </ul>
  </body>
 </html>

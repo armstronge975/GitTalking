@@ -1,10 +1,15 @@
 package com.foobar.gittalking;
 
+import java.sql.Timestamp;
+
 public class Message {
 	public int ID;
 	public String toUser;
 	public String fromUser;
 	public String content;
+	public Timestamp timeSent;
+	public int likes;
+	public int comments;
 	
 	public int getID() {
 		return ID;
@@ -36,5 +41,37 @@ public class Message {
 	
 	public void setContent(String content) {
 		this.content = content;
+	}
+	
+	public Timestamp getTimeSent() {
+		return timeSent;
+	}
+	
+	public void setTimeSent(Timestamp ts) {
+		timeSent = ts;
+	}
+	
+	public int getLikes() {
+		return likes;
+	}
+	
+	public void setLikes(int like) {
+		likes = like;
+	}
+	
+	public int getComments() {
+		return comments;
+	}
+	
+	public void setComments(int c) {
+		comments = c;
+	}
+	
+	public void incrementLikes() {
+		likes++;
+	}
+	
+	public void incrementComments() {
+		comments++;
 	}
 }

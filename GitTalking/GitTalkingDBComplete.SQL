@@ -186,8 +186,17 @@ DROP TABLE IF EXISTS `public_message`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `public_message` (
   `pub_id` int(11) NOT NULL,
-  `public_messagecontent` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`pub_id`)
+  `public_messagecontent` varchar(300) DEFAULT NULL,
+  `to_user` varchar(300) DEFAULT NULL,
+  `from_user` varchar(300) DEFAULT NULL,
+  `time_sent` TIMESTAMP NOT NULL DEFAULT NOW(),
+  `likes` INT DEFAULT 0,
+  `comments` INT DEFAULT 0,
+   PRIMARY KEY (`pub_id`),
+   FOREIGN KEY (`to_user`) REFERENCES `admin_user`(`user_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`to_user`) REFERENCES `standard_users`(`user_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`from_user`) REFERENCES `admin_user`(`user_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`from_user`) REFERENCES `standard_users`(`user_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='publick message content';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -197,7 +206,8 @@ CREATE TABLE `public_message` (
 
 LOCK TABLES `public_message` WRITE;
 /*!40000 ALTER TABLE `public_message` DISABLE KEYS */;
-INSERT INTO `public_message` VALUES (8001,'Lets get started everyone!');
+INSERT INTO `public_message` VALUES (8001,'Lets get started everyone!','1002','1003',NOW(),0,0);
+INSERT INTO `public_message` VALUES (8002,'Leggo!','1002','1005',NOW(),0,0);
 /*!40000 ALTER TABLE `public_message` ENABLE KEYS */;
 UNLOCK TABLES;
 

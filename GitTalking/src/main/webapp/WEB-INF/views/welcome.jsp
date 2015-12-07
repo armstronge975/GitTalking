@@ -14,8 +14,8 @@
  <body>
  	<h1>${message} </h1>
   <h1>Hello, ${username}</h1>
-  <input class="userCntrls" type="text" id="repoSearch" placeholder="Search a repository, username or full name">
-  <select class="userCntrls" id="userDropMenu" onchange="javascript:window.location.replace(this.options[this.selectedIndex].value);">
+  <input class="userCntrls" type="text" id="repoSearch" placeholder="Search a repository, username or full name" />
+<select class="userCntrls" id="userDropMenu" onchange="javascript:window.location.replace(this.options[this.selectedIndex].value);">
 	 <option value="${username}" id="activeUser">${username}</option>
 	 <option class="altOps" value="<%=request.getContextPath()%>/timeline">Your Profile</option>
 	 <option class="altOps" value="<%=request.getContextPath()%>/messages">Your Private Messages</option>
@@ -29,7 +29,7 @@
 	<h1>Other Resources</h1>
 	 <a href="<%=request.getContextPath()%>/pullrequest">Pull Requests</a><br><br>
 	 <a href="<%=request.getContextPath()%>/timeline">My Timeline</a><br><br>
-	 <a href="<%=request.getContextPath()%>/publicrepos">View Public Repositories</a><br><br>					
+	 <a href="<%=request.getContextPath()%>/publicrepos">View Public Repositories</a><br><br>								
 	 <a href="<%=request.getContextPath()%>/tutorial">Git Tutorial</a><br><br>
   </div>
   <h1 class="heads">Your Repositories:</h1>

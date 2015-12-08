@@ -6,7 +6,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
- 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -29,24 +30,29 @@ public class MessageDAOImpl implements MessageDAO {
 	@Override
 	public List<Message> getToMessages(String userID) throws SQLException {
 		 String query = "select * from public_message WHERE to_user = ? ORDER BY time_sent DESC";
-	        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		 JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 	        List<Message> received = new ArrayList<Message>();
-	        Object[] args = new Object[] {userID};
-	        List<Map<String,Object>> msgRows = jdbcTemplate.queryForList(query,args);
-	         
-	        for(Map<String,Object> msgRow : msgRows){
-	            Message msg = new Message();
-	            msg.setID(Integer.parseInt(String.valueOf(msgRow.get("pub_id"))));
-	            msg.setFromUser(String.valueOf(msgRow.get("from_user")));
-	            msg.setToUser(String.valueOf(msgRow.get("to_user")));
-	            msg.setContent(String.valueOf(msgRow.get("public_messagecontent")));
-	            msg.setTimeSent((Timestamp)msgRow.get("time_sent"));
-	            msg.setLikes(Integer.parseInt(String.valueOf(msgRow.get("likes"))));
-	            msg.setComments(Integer.parseInt(String.valueOf(msgRow.get("comments"))));
-	            received.add(msg);
-	        }
-	        return received;
-	    }
+	        try {
+	        	Object[] args = new Object[] {userID};
+		        List<Map<String,Object>> msgRows = jdbcTemplate.queryForList(query,args);
+		         
+		        for(Map<String,Object> msgRow : msgRows){
+		            Message msg = new Message();
+		            msg.setID(Integer.parseInt(String.valueOf(msgRow.get("pub_id"))));
+		            msg.setFromUser(String.valueOf(msgRow.get("from_user")));
+		            msg.setToUser(String.valueOf(msgRow.get("to_user")));
+		            msg.setContent(String.valueOf(msgRow.get("public_messagecontent")));
+		            msg.setTimeSent((Timestamp)msgRow.get("time_sent"));
+		            msg.setLikes(Integer.parseInt(String.valueOf(msgRow.get("likes"))));
+		            msg.setComments(Integer.parseInt(String.valueOf(msgRow.get("comments"))));
+		            received.add(msg);
+		        }
+		        return received;
+		        }
+		        catch(Exception ex) {
+		        		return null;
+			        }
+		        }	        	                	    
 	
 	// The PK is only useful to the system but is needed to increment the next PK
 	@Override

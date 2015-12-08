@@ -1,8 +1,19 @@
+/** HomeController tells Spring which file to go to next. Each JSP file gets its own "RequestMappings", or methods that return the name of the file to 
+ * go to next. The value attribute of RequestMapping matches the end of an HREF or action attribute from a tag in JSP and method tells it whether to 
+ * use GET or POST. SessionAttributes can be thought of as global variables shared across the whole session and all pages. These are used when data must
+ * be sent across multiple pages. Models represent one page. Every time Spring goes to a different RequestMapping, it uses a new model, so it won't see
+ * data you sent from a previous page UNLESS you use ModelAttributes. ModelAttributes are basically variables of a model that are only available to the 
+ * next available mapping or JSP file you go to. Use model.AddAttribute("varName","value) to send data to your JSP page.
+ * Use ctx to get beans specified in spring.xml. This will allow you to connect to the database. Call your DAOImpl methods here to query the database.
+ * Make sure that each page has no more than 2 request mappings (1 for GET, 1 for POST)
+ */
+
 package com.foobar.gittalking;
 
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.slf4j.Logger;
@@ -29,12 +40,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @SessionAttributes(value={"user","oldUserID"})
 public class HomeController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	
-	//private UserDelegate userDelegate;
-	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -120,18 +125,32 @@ public class HomeController {
 		return "register";
 	}
 	
-	@RequestMapping(value = "/tutorial", method = RequestMethod.GET)
-    public String login(Locale locale, Model model) {
-		System.out.println("Enter /tutorial GET mapping");		
-        return "tutorial";
+	@RequestMapping(value = "/viewpublicrepository", method = RequestMethod.GET)
+   public String loginvpr(Locale locale, Model model) {
+		System.out.println("Enter /viewpublicrepository GET mapping");		
+        return "viewpublicrepository";
     }
 	
-	@RequestMapping(value = "/tutorial", method = RequestMethod.POST)
-    public String go(@ModelAttribute User user, Model model) {
-		System.out.println("Enter /tutorial POST mapping");
+	@RequestMapping(value = "/viewpublicrepository", method = RequestMethod.POST)
+   public String viewpublicrepository(@ModelAttribute User user, Model model) {
+	System.out.println("Enter /viewpublicrepository POST mapping");
+	model.addAttribute("user", user);
+    return "viewpublicrepository";
+   }
+
+	@RequestMapping(value = "/pullrequest", method = RequestMethod.GET)
+	   public String loginpullrequest(Locale locale, Model model) {
+			System.out.println("Enter /pullrequest GET mapping");		
+	        return "pullrequest";
+	    }
+		
+		@RequestMapping(value = "/pullrequest", method = RequestMethod.POST)
+	   public String pullrequest(@ModelAttribute User user, Model model) {
+		System.out.println("Enter /pullrequest POST mapping");
 		model.addAttribute("user", user);
-        return "tutorial";
+		return "pullrequest";
     }
+	
 	@RequestMapping(value = "/welcome", method = RequestMethod.POST)
 	public String welcome(@ModelAttribute User user, Model model) {	
 		model.addAttribute("userId", user.getUserID());
@@ -139,8 +158,36 @@ public class HomeController {
 		return "welcome";
 	}
 	
+	@RequestMapping(value = "/team", method = RequestMethod.GET)
+	   public String loginteam(Locale locale, Model model) {
+			System.out.println("Enter /team GET mapping");		
+	        return "team";
+	    }
+		
+		@RequestMapping(value = "/team", method = RequestMethod.POST)
+	   public String team(@ModelAttribute User user, Model model) {
+		System.out.println("Enter /team POST mapping");
+		model.addAttribute("user", user);
+	    return "team";
+	   }
+
+
+	@RequestMapping(value = "/about", method = RequestMethod.GET)
+	   public String loginabout(Locale locale, Model model) {
+			System.out.println("Enter /about GET mapping");		
+	        return "about";
+	    }
+		
+		@RequestMapping(value = "/about", method = RequestMethod.POST)
+	   public String about(@ModelAttribute User user, Model model) {
+		System.out.println("Enter /about POST mapping");
+		model.addAttribute("user", user);
+	    return "about";
+	   }
+	
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
-	public String returnToHome(Model model) {	
+	public String returnToHome(@ModelAttribute User user, Model model) {
+		model.addAttribute(user.getUserID());
 		return "welcome";
 		
 	}
@@ -150,17 +197,7 @@ public class HomeController {
 		System.out.println("Enter /upcoming GET mapping");
 		return "upcoming";		
 	}
-	
-	@RequestMapping(value = "/about", method = RequestMethod.GET)
-	public String about(Model model) {
-		return "about";		
-	}
-	
-	@RequestMapping(value = "/team", method = RequestMethod.GET)
-	public String team(Model model) {
-		return "team";		
-	}
-	
+
 	@RequestMapping(value = "/account", method = RequestMethod.GET)
 	public String accountGet(@ModelAttribute("user") User user, Model model) {
 		model.addAttribute("oldUserID",user.getUserID());
@@ -223,6 +260,11 @@ public class HomeController {
         model.addAttribute("timeline", new Timeline());
         model.addAttribute("timelineContent",tl.getContent());
         model.addAttribute("username",tl.getUserID());
+        
+        // get all public messages of user
+        MessageDAO messageDao = ctx.getBean("messageDao", MessageDAO.class);
+        List<Message> msgList = messageDao.getToMessages(user.getUserID());
+        model.addAttribute(msgList);
 		return "timeline";		
 	}
 	
@@ -241,11 +283,6 @@ public class HomeController {
 	@RequestMapping(value = "/createrepo", method = RequestMethod.GET)
 	public String createRepo(Model model) {
 		return "createrepo";		
-	}
-	
-	@RequestMapping(value = "/pullrequest", method = RequestMethod.GET)
-	public String pullRequest(Model model) {
-		return "pullrequest";		
 	}
 	
 	@RequestMapping(value = "/collablist", method = RequestMethod.GET)

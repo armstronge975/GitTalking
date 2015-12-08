@@ -37,11 +37,17 @@ public class UserDAOImpl implements UserDAO {
          	pstmt.setString(3, user.getLastName());
          	pstmt.setString(4, user.getAccountType());
          	pstmt.setString(5, user.getEmail());
-         	pstmt.setString(6, user.getPassword());
+         	pstmt.setString(6, user.getPassword());        	
+         	pstmt.executeUpdate();
          	
-         	int result = pstmt.executeUpdate();
-         	if(result != 0) 
-         		System.out.println("Insert successful");         	   	    	
+         	// Automatically create timeline as well
+         	String query2 = "INSERT INTO timeline VALUES (?,'No Information available',?) where user_id = (SELECT DISTINCT(user_id) FROM standard_user WHERE user_id = ?";         
+        	PreparedStatement pstmt2 = dataSource.getConnection().prepareStatement(query2);
+        	// setString fills in values of each question mark
+         	pstmt2.setString(1, user.getUserID());
+         	pstmt2.setString(2, user.getFirstName());
+         	pstmt2.setString(3, user.getLastName());       	
+         	pstmt2.executeUpdate();
     }
     
     // update standard user when they edit their account details

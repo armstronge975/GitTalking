@@ -11,12 +11,11 @@
  <title>Message</title>
  </head>
  <body>
- <h1 class="userCntrls" id="welcomeMsg">Hello, armstronge975!</h1>
+ <h1 class="userCntrls" id="welcomeMsg">Hello, ${user.userID}!</h1>
  <input class="userCntrls" type="text" id="repoSearch" placeholder="Search a repository, username or full name">
 <select class="userCntrls" id="userDropMenu" onchange="javascript:window.location.replace(this.options[this.selectedIndex].value);">
-	 <option value="${username}" id="activeUser">${username}</option>
+	 <option value="${username}" id="activeUser">${user.userID}</option>
 	 <option class="altOps" value="<%=request.getContextPath()%>/timeline">Your Profile</option>
-	 <option class="altOps" value="<%=request.getContextPath()%>/messages">Your Private Messages</option>
 	 <option class="altOps" value="<%=request.getContextPath()%>/account">Your Account Settings</option>
 	 <option class="altOps" value="<%=request.getContextPath()%>/">Logout</option>
   </select>
@@ -38,7 +37,7 @@
  <ul class="bottomnavbar">
 	<li class="nvbr"> <a target="_blank" href="https://github.com/armstronge975/GitTalking">Project on GitHub</a></li>
 	<li class="nvbr"> <a href="<%=request.getContextPath()%>/team">The GitTalking Team</a></li>
-	<li class="nvbr"> <a href="<%=request.getContextPath()%>/">Back to Home Page</a></li>
+	<li class="nvbr"> <a href="<%=request.getContextPath()%>/welcome">Back to Home Page</a></li>
 	<li class="nvbr"> <a href="<%=request.getContextPath()%>/about">About</a></li>
 	<li class="nvbr"> <a href="<%=request.getContextPath()%>/upcoming">Coming Up</a></li>
   </ul>

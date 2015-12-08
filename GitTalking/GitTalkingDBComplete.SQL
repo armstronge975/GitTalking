@@ -18,33 +18,6 @@ USE `gittalking`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `admin_user`
---
-
-DROP TABLE IF EXISTS `admin_user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `admin_user` (
-  `user_id` varchar(20) NOT NULL,
-  `admin_firstname` varchar(45) DEFAULT NULL,
-  `admin_lastname` varchar(45) DEFAULT NULL,
-  -- varbinary needed for encryption
-  `password` varbinary(250) DEFAULT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1008 DEFAULT CHARSET=utf8 COMMENT='Admin user with admin rights.  Links to User table.';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `admin_user`
---
-
-LOCK TABLES `admin_user` WRITE;
-/*!40000 ALTER TABLE `admin_user` DISABLE KEYS */;
-INSERT INTO `admin_user` VALUES ('1001','Emily','Armstrong',AES_ENCRYPT('pikachu<3','.key.')),('1002','Richard','Connell',AES_ENCRYPT('bacon','.key.')),('1003','Eric','Cislo',AES_ENCRYPT('bacon','.key.')),(1004,'Mike','Kidney',AES_ENCRYPT('bacon','.key.')),('1005','Paiman','Irani',AES_ENCRYPT('bacon','.key.')),('1006','Iain','St. John',AES_ENCRYPT('bacon','.key.')),('1007','Kimberly','Gero',AES_ENCRYPT('bacon','.key.'));
-/*!40000 ALTER TABLE `admin_user` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `groups`
 --
 
@@ -135,10 +108,8 @@ CREATE TABLE `private_message` (
   `dateSent` timestamp,
   `private_messagecontent` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`priv_id`),
-  FOREIGN KEY (`to_user`) REFERENCES `standard_users`(`user_id`),
-  FOREIGN KEY (`to_user`) REFERENCES `admin_user`(`user_id`),
-  FOREIGN KEY (`from_user`) REFERENCES `admin_user`(`user_id`),
-  FOREIGN KEY (`from_user`) REFERENCES `standard_users`(`user_id`)
+  FOREIGN KEY (`to_user`) REFERENCES `users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`from_user`) REFERENCES `user`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='stored the private message content.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -193,10 +164,8 @@ CREATE TABLE `public_message` (
   `likes` INT DEFAULT 0,
   `comments` INT DEFAULT 0,
    PRIMARY KEY (`pub_id`),
-   FOREIGN KEY (`to_user`) REFERENCES `admin_user`(`user_id`) ON DELETE CASCADE,
-  FOREIGN KEY (`to_user`) REFERENCES `standard_users`(`user_id`) ON DELETE CASCADE,
-  FOREIGN KEY (`from_user`) REFERENCES `admin_user`(`user_id`) ON DELETE CASCADE,
-  FOREIGN KEY (`from_user`) REFERENCES `standard_users`(`user_id`) ON DELETE CASCADE
+   FOREIGN KEY (`to_user`) REFERENCES `users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`from_user`) REFERENCES `users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='publick message content';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -214,17 +183,19 @@ UNLOCK TABLES;
 --
 -- Table structure for table `standard_users`
 --
-
 DROP TABLE IF EXISTS `standard_users`;
+DROP TABLE IF EXISTS `admin_user`;
+DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `standard_users` (
+CREATE TABLE `users` (
   `user_id` varchar(20) NOT NULL,
   `first_name` varchar(45) DEFAULT NULL,
   `last_name` varchar(45) DEFAULT NULL,
   `account_type` varchar(7) DEFAULT NULL,
   `email` varchar(30) DEFAULT NULL,
   `password` varbinary(250) DEFAULT NULL,
+  `user_level` varchar(7) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9006 DEFAULT CHARSET=utf8 COMMENT='Standard users are users other than admin users.';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -233,10 +204,11 @@ CREATE TABLE `standard_users` (
 -- Dumping data for table `standard_users`
 --
 
-LOCK TABLES `standard_users` WRITE;
-/*!40000 ALTER TABLE `standard_users` DISABLE KEYS */;
-INSERT INTO `standard_users` VALUES ('Greg','Greg','Baxter','public','bax@gmail.com',AES_ENCRYPT('tooObvi','.key.')),('ADeetu','Arrtu','Deetu','private','deetu@gmail.com',AES_ENCRYPT('tooObvi','.key.')),('flowers','Jane','Rose','public','jrose@yahoo.com',AES_ENCRYPT('tooObvi','.key.')),('mkyson','Tony','Tyson','public','tyson@hotmail.com',AES_ENCRYPT('tooObvi','.key.')),('fsaltz','Francine','Salter','public','fran@aol.com',AES_ENCRYPT('tooObvi','.key.'));
-/*!40000 ALTER TABLE `standard_users` ENABLE KEYS */;
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES ('Greg','Greg','Baxter','public','bax@gmail.com',AES_ENCRYPT('tooObvi','.key.'),'standard'),('ADeetu','Arrtu','Deetu','private','deetu@gmail.com',AES_ENCRYPT('tooObvi','.key.'),'standard'),('flowers','Jane','Rose','public','jrose@yahoo.com',AES_ENCRYPT('tooObvi','.key.'),'standard'),('mkyson','Tony','Tyson','public','tyson@hotmail.com',AES_ENCRYPT('tooObvi','.key.'),'standard'),('fsaltz','Francine','Salter','public','fran@aol.com',AES_ENCRYPT('tooObvi','.key.'),'standard');
+INSERT INTO `users` VALUES ('1001','Emily','Armstrong','private','emily@gmail.com',AES_ENCRYPT('pikachu<3','.key.'),'admin'),('1002','Richard','Connell','private','rich@gmail.com',AES_ENCRYPT('bacon','.key.'),'admin'),('1003','Eric','Cislo','private','eric@gmail.com',AES_ENCRYPT('bacon','.key.'),'admin'),(1004,'Mike','Kidney','private','mike@gmail.com',AES_ENCRYPT('bacon','.key.'),'admin'),('1005','Paiman','Irani','private','paiman@gmail.com',AES_ENCRYPT('bacon','.key.'),'admin'),('1006','Iain','St. John','private','iain@gmail.com',AES_ENCRYPT('bacon','.key.'),'admin'),('1007','Kimberly','Gero','private','kim@gmail.com',AES_ENCRYPT('bacon','.key.'),'admin');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -252,8 +224,8 @@ CREATE TABLE `timeline` (
   `timeline_content` varchar(45) DEFAULT NULL,
   `user_id` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`timeline_id`),
-  FOREIGN KEY (`user_id`) REFERENCES `admin_user`(`user_id`) ON DELETE CASCADE,
-  FOREIGN KEY (`user_id`) REFERENCES `standard_users`(`user_id`) ON DELETE CASCADE
+  FOREIGN KEY (`user_id`) REFERENCES `admin_user`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`user_id`) REFERENCES `standard_users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Social tmeline content';
 /*!40101 SET character_set_client = @saved_cs_client */;
 

@@ -14,9 +14,8 @@
  <h1 class="userCntrls" id="repoName">Hello-World Collaborators</h1>
  <input class="userCntrls" type="text" id="repoSearch" placeholder="Search a repository, username or full name">
  <select class="userCntrls" id="userDropMenu" onchange="javascript:window.location.replace(this.options[this.selectedIndex].value);">
-	 <option value="${username}" id="activeUser">${username}</option>
+	 <option value="${user.userID}" id="activeUser">${user.userID}</option>
 	 <option class="altOps" value="<%=request.getContextPath()%>/timeline">Your Profile</option>
-	 <option class="altOps" value="<%=request.getContextPath()%>/messages">Your Private Messages</option>
 	 <option class="altOps" value="<%=request.getContextPath()%>/account">Your Account Settings</option>
 	 <option class="altOps" value="<%=request.getContextPath()%>/">Logout</option>
   </select>

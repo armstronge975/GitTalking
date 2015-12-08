@@ -70,4 +70,12 @@ public class TimelineDAOImpl implements TimelineDAO {
         Object[] args = new Object[] {content, userID};
         jdbcTemplate.update(query, args);
     }
+	
+	// The PK is only useful to the system but is needed to increment the next PK
+		@Override
+		public int getMaxInt() throws SQLException {
+			String query = "select MAX(timeline_id) from timeline";
+	        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+	        return jdbcTemplate.queryForInt(query);
+		}
 }

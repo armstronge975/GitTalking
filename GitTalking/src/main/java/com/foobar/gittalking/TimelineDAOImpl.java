@@ -26,28 +26,9 @@ public class TimelineDAOImpl implements TimelineDAO {
 
 
 	@Override
-	public Timeline findStandardTimeline(String userID) throws SQLException {
-		String query = "SELECT * from timeline INNER JOIN standard_users ON timeline.user_id = standard_users.user_id" +
-				" WHERE timeline.user_id = ? AND standard_users.user_id = ?";
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);      
-        //using RowMapper anonymous class, we can create a separate RowMapper for reuse
-        Timeline timeline = jdbcTemplate.queryForObject(query, new Object[]{userID,userID}, new RowMapper<Timeline>(){ 
-               @Override
-               public Timeline mapRow(ResultSet rs, int rowNum)
-                       throws SQLException {
-                   Timeline tl = new Timeline();
-                   tl.setID(rs.getInt("timeline_id"));
-                   tl.setContent(rs.getString("timeline_content"));
-                   tl.setUserID(rs.getString("user_id"));
-                   return tl;
-               }}); 
-        return timeline;
-	}
-
-	@Override
-	public Timeline findAdminTimeline(String userID) throws SQLException {
-		String query = "SELECT * from timeline INNER JOIN admin_user ON timeline.user_id = admin_user.user_id" +
-				" WHERE timeline.user_id = ? AND admin_user.user_id = ?";
+	public Timeline findUserTimeline(String userID) throws SQLException {
+		String query = "SELECT * from timeline INNER JOIN users ON timeline.user_id = users.user_id" +
+				" WHERE timeline.user_id = ? AND users.user_id = ?";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);      
         //using RowMapper anonymous class, we can create a separate RowMapper for reuse
         Timeline timeline = jdbcTemplate.queryForObject(query, new Object[]{userID,userID}, new RowMapper<Timeline>(){ 

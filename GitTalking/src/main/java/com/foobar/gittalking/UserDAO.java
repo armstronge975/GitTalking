@@ -12,11 +12,9 @@ public interface UserDAO {
 		// user login
 		public User login(String userID, String password);
 		// authenticate credentials during login
-		public boolean userInStandard(String userID) throws SQLException;
-		public boolean userInAdmin(String userID) throws SQLException;
+		public boolean userInUsers(String userID) throws SQLException;
 		public boolean accountExists(String userID, String password) throws SQLException;
-		public boolean accountInAdmin(String userID, String password) throws SQLException;
-		public boolean accountInStandard(String userID, String password) throws SQLException;
+		public boolean accountInUsers(String userID, String password) throws SQLException;
 		// update account details for standard users
 		public void updateUser(User user, String oldUserID) throws SQLException;
     }

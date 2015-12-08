@@ -251,11 +251,8 @@ public class HomeController {
         UserDAO userDao = ctx.getBean("userDao", UserDAO.class);
         TimelineDAO tlDao = ctx.getBean("timelineDao", TimelineDAO.class);
         Timeline tl = new Timeline();
-        if(userDao.userInAdmin(user.getUserID())) {
-        	tl = tlDao.findAdminTimeline(user.getUserID());
-        }
-        else if(userDao.userInStandard(user.getUserID())) {
-        	tl = tlDao.findStandardTimeline(user.getUserID());
+        if(userDao.userInUsers((user.getUserID()))) {
+        	tl = tlDao.findUserTimeline(user.getUserID());
         }
         model.addAttribute("timeline", new Timeline());
         model.addAttribute("timelineContent",tl.getContent());

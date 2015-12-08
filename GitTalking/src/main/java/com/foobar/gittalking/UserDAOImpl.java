@@ -29,7 +29,7 @@ public class UserDAOImpl implements UserDAO {
     // AES_ENCRYPT is a way to encrypt your data when entering it into the database; its arguments are the field to encrypt followed by a programmer-selected key
     @Override
     public void register(User user) throws SQLException {
-    		String query = "INSERT INTO standard_users VALUES (?,?,?,?,?,AES_ENCRYPT(?,'.key.'))";         
+    		String query = "INSERT INTO users VALUES (?,?,?,?,?,?,AES_ENCRYPT(?,'.key.'))";         
         	PreparedStatement pstmt = dataSource.getConnection().prepareStatement(query);
         	// setString fills in values of each question mark
          	pstmt.setString(1, user.getUserID());
@@ -63,7 +63,7 @@ public class UserDAOImpl implements UserDAO {
     // check if userID available
     @Override
     public boolean userIDAvailable(String userID) throws SQLException {
-    	String query = "SELECT count(*) from standard_users, admin_user WHERE standard_users.user_id = ? OR admin_user.user_id = ?";
+    	String query = "SELECT count(*) from users, WHERE users.user_id = ?";
     	PreparedStatement pstmt = dataSource.getConnection().prepareStatement(query);
     	pstmt.setString(1, userID);
     	pstmt.setString(2, userID);
@@ -71,20 +71,10 @@ public class UserDAOImpl implements UserDAO {
     	return (resultSet.next() && resultSet.getInt(1) == 0);
     }
     
- // check if userID available in admin_user
-    @Override
-    public boolean userInAdmin(String userID) throws SQLException {
-    	String query = "SELECT count(*) from admin_user WHERE user_id = ?";
-    	PreparedStatement pstmt = dataSource.getConnection().prepareStatement(query);
-    	pstmt.setString(1, userID);  	
-    	ResultSet resultSet = pstmt.executeQuery();
-    	return (resultSet.next() && resultSet.getInt(1) == 1);
-    }
-    
  // check if userID available in standard_users
     @Override
-    public boolean userInStandard(String userID) throws SQLException {
-    	String query = "SELECT count(*) from standard_users WHERE user_id = ?";
+    public boolean userInUsers(String userID) throws SQLException {
+    	String query = "SELECT count(*) from users WHERE user_id = ?";
     	PreparedStatement pstmt = dataSource.getConnection().prepareStatement(query);
     	pstmt.setString(1, userID);  	
     	ResultSet resultSet = pstmt.executeQuery();
@@ -99,28 +89,8 @@ public class UserDAOImpl implements UserDAO {
     	User user = null;
     	String query;
     	try {
-    		if (accountInAdmin(userID, password)) {
-    			query = "SELECT * from admin_user WHERE user_id = ? AND AES_DECRYPT(password,'.key.') = ?";
-    			 JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-                 
-    	            //using RowMapper anonymous class, we can create a separate RowMapper for reuse
-    	            user = jdbcTemplate.queryForObject(query, new Object[]{userID, password}, new RowMapper<User>(){
-    	     
-    	                @Override
-    	                public User mapRow(ResultSet rs, int rowNum)
-    	                        throws SQLException {
-    	                    User user = new User();
-    	                    user.setUserID(rs.getString("user_id"));
-    	                    user.setFirstName(rs.getString("admin_firstname"));
-    	                    user.setLastName(rs.getString("admin_lastname"));
-    	                    user.setPassword(rs.getString("password"));
-    	                    return user;
-    	                }});   
-    		}
-    		// user is standard, not admin
-    		else {
-    			query = "SELECT * from standard_users WHERE user_id = ? AND AES_DECRYPT(password,'.key.') = ?";
-    			JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+    		query = "SELECT * from users WHERE user_id = ? AND AES_DECRYPT(password,'.key.') = ?";
+    		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
                 
                 //using RowMapper anonymous class, we can create a separate RowMapper for reuse
                 user = jdbcTemplate.queryForObject(query, new Object[]{userID, password}, new RowMapper<User>(){
@@ -138,7 +108,7 @@ public class UserDAOImpl implements UserDAO {
                         return user;
                     }});  
     		}    		                     
-    	}
+    	
     	catch(Exception e) {
     		e.printStackTrace();
     	}
@@ -152,8 +122,8 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public boolean accountExists(String userID, String password) throws SQLException {
 		try {
-			String query = "SELECT count(*) from admin_user WHERE user_id = ? AND AES_DECRYPT(password,'.key.') = ?";
-			String query2 = "SELECT count(*) from standard_users WHERE user_id = ? AND AES_DECRYPT(password,'.key.') = ?";
+			String query = "SELECT count(*) from users WHERE user_id = ? AND AES_DECRYPT(password,'.key.') = ?";
+			String query2 = "SELECT count(*) from users WHERE user_id = ? AND AES_DECRYPT(password,'.key.') = ?";
 	    	PreparedStatement pstmt = dataSource.getConnection().prepareStatement(query);
 	    	PreparedStatement pstmt2 = dataSource.getConnection().prepareStatement(query2);
 	    	pstmt.setString(1, userID);
@@ -171,17 +141,8 @@ public class UserDAOImpl implements UserDAO {
 		return false;
 	}
 	
-	public boolean accountInAdmin(String userID, String password) throws SQLException {
-		String query = "SELECT count(*) from admin_user WHERE user_id = ? AND AES_DECRYPT(password,'.key.') = ?";
-		PreparedStatement pstmt = dataSource.getConnection().prepareStatement(query);
-		pstmt.setString(1, userID);
-    	pstmt.setString(2, password);	    	
-    	ResultSet resultSet = pstmt.executeQuery();
-    	return (resultSet.next() && resultSet.getInt(1) == 1);
-	}
-	
-	public boolean accountInStandard(String userID, String password) throws SQLException {
-		String query = "SELECT count(*) from standard_users WHERE user_id = ? AND AES_DECRYPT(password,'.key.') = ?";
+	public boolean accountInUsers(String userID, String password) throws SQLException {
+		String query = "SELECT count(*) from users WHERE user_id = ? AND AES_DECRYPT(password,'.key.') = ? AND ?";
 		PreparedStatement pstmt = dataSource.getConnection().prepareStatement(query);
 		pstmt.setString(1, userID);
     	pstmt.setString(2, password);	    	

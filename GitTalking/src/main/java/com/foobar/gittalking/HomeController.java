@@ -12,9 +12,7 @@ package com.foobar.gittalking;
 
 import java.sql.SQLException;
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.slf4j.Logger;
@@ -149,9 +147,22 @@ public class HomeController {
 	   public String pullrequest(@ModelAttribute User user, Model model) {
 		System.out.println("Enter /pullrequest POST mapping");
 		model.addAttribute("user", user);
+<<<<<<< HEAD
+        return "tutorial";
+    }
+	
+======
 	    return "pullrequest";
 	   }	
 	
+	
+	@RequestMapping(value = "/welcome", method = RequestMethod.POST)
+	public String welcome(@ModelAttribute User user, Model model) {	
+		model.addAttribute("userId", user.getUserID());
+		System.out.println("Enter /welcome POST mapping");
+		return "welcome";
+	}
+>>>>>>> branch 'master' of https://github.com/armstronge975/GitTalking
 	
 	@RequestMapping(value = "/team", method = RequestMethod.GET)
 	   public String loginteam(Locale locale, Model model) {
@@ -182,17 +193,9 @@ public class HomeController {
 	
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
 	public String returnToHome(@ModelAttribute User user, Model model) {
-		System.out.println("Enter /welcome GET mapping");
-		//model.addAttribute("user", user);
-		model.addAttribute("username", user.getUserID());
-		return "welcome";		
-	}
-	
-	@RequestMapping(value = "/welcome", method = RequestMethod.POST)
-	public String welcome(@ModelAttribute User user, Model model) {	
-		model.addAttribute("userId", user.getUserID());
-		System.out.println("Enter /welcome POST mapping");
+		model.addAttribute(user.getUserID());
 		return "welcome";
+		
 	}
 	
 	@RequestMapping(value = "/upcoming", method = RequestMethod.GET)
@@ -266,13 +269,8 @@ public class HomeController {
         
         // get all public messages of user
         MessageDAO messageDao = ctx.getBean("messageDao", MessageDAO.class);
-        List<Message> msgList = new ArrayList<Message>();
-        msgList = messageDao.getToMessages(user.getUserID());
-        model.addAttribute("msgList", msgList);
-        System.out.println("Messages received:");
-        for(Message msg: msgList) {
-        	System.out.println(msg.getContent());
-        }
+        List<Message> msgList = messageDao.getToMessages(user.getUserID());
+        model.addAttribute(msgList);
 		return "timeline";		
 	}
 	
@@ -291,6 +289,17 @@ public class HomeController {
 	@RequestMapping(value = "/createrepo", method = RequestMethod.GET)
 	public String createRepo(Model model) {
 		return "createrepo";		
+<<<<<<< HEAD
+	}
+	
+	
+	
+	
+	@RequestMapping(value = "/pullrequest", method = RequestMethod.GET)
+	public String pullRequest(Model model) {
+		return "pullrequest";		
+=======
+>>>>>>> branch 'master' of https://github.com/armstronge975/GitTalking
 	}
 	
 	@RequestMapping(value = "/collablist", method = RequestMethod.GET)

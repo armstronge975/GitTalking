@@ -29,7 +29,7 @@ public class UserDAOImpl implements UserDAO {
     // AES_ENCRYPT is a way to encrypt your data when entering it into the database; its arguments are the field to encrypt followed by a programmer-selected key
     @Override
     public void register(User user) throws SQLException {
-    		String query = "INSERT INTO users VALUES (?,?,?,?,?,?,AES_ENCRYPT(?,'.key.'))";         
+    		String query = "INSERT INTO users VALUES (?,?,?,?,?,AES_ENCRYPT(?,'.key.'))";         
         	PreparedStatement pstmt = dataSource.getConnection().prepareStatement(query);
         	// setString fills in values of each question mark
          	pstmt.setString(1, user.getUserID());
@@ -50,11 +50,11 @@ public class UserDAOImpl implements UserDAO {
          	pstmt2.executeUpdate();
     }
     
-    // update standard user when they edit their account details
+    // update user when they edit their account details
     // This method uses JDBCTemplate, a spring class used to reduce the amount of code needed to run queries
     @Override
     public void updateUser(User user,String oldUserID) throws SQLException {
-    	String query = "UPDATE standard_users SET user_id = ?, first_name = ?, last_name = ?, account_type = ?, email = ?, password = AES_ENCRYPT(?,'.key.') WHERE user_id = ?";
+    	String query = "UPDATE users SET user_id = ?, first_name = ?, last_name = ?, account_type = ?, email = ?, password = AES_ENCRYPT(?,'.key.') WHERE user_id = ?";
     	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         Object[] args = new Object[] {user.getUserID(), user.getFirstName(), user.getLastName(),user.getAccountType(),user.getEmail(),user.getPassword(),oldUserID};
         jdbcTemplate.update(query, args);
@@ -71,7 +71,7 @@ public class UserDAOImpl implements UserDAO {
     	return (resultSet.next() && resultSet.getInt(1) == 0);
     }
     
- // check if userID available in standard_users
+ // check if userID available in users
     @Override
     public boolean userInUsers(String userID) throws SQLException {
     	String query = "SELECT count(*) from users WHERE user_id = ?";
@@ -142,7 +142,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	public boolean accountInUsers(String userID, String password) throws SQLException {
-		String query = "SELECT count(*) from users WHERE user_id = ? AND AES_DECRYPT(password,'.key.') = ? AND ?";
+		String query = "SELECT count(*) from users WHERE user_id = ? AND AES_DECRYPT(password,'.key.') = ?";
 		PreparedStatement pstmt = dataSource.getConnection().prepareStatement(query);
 		pstmt.setString(1, userID);
     	pstmt.setString(2, password);	    	

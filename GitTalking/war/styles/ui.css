@@ -193,7 +193,17 @@
 #resources > a:visited{color:black;}
 #resources > a:hover{color:purple;}
 #resources> a:link{color:blue;}
-
-
 /* User Timeline page */
 /*--------------------------------------------------*/
+#btnEdit {
+	border-radius:0;
+	font-size:15px;
+	padding:2px;
+}
+
+pre { 
+	color:gold;
+	font-size:18px;
+	font-family:Arial;
+	text-align:left;
+}

@@ -1,29 +1,8 @@
 package com.foobar.gittalking;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class User {
-	private String firstName, lastName, email, accountType, userID, password;
-	/*
-	// FIX THIS LATER
-	public User() {
-		this.firstName = "";
-		this.lastName = "";
-		this.email = "";
-		this.accountType = "";
-		this.userID = "";
-		this.password = "";
-	}
+	private String firstName, lastName, email, accountType, userID, password, userLevel;
 	
-	public User(String fName, String lName, String email, String aType, String UserID, String password) {		
-		this.firstName = fName;
-		this.lastName = lName;
-		this.email = email;
-		this.accountType = aType;
-		this.userID = UserID;
-		this.password = password;
-	}
-	*/
 	public String getFirstName() {
 		return firstName;
 	}
@@ -70,6 +49,14 @@ public class User {
 	
 	public void setPassword(String pw) {
 		password = pw;
+	}
+	
+	public void setUserLevel(String UL) {
+		userLevel = UL;
+	}
+	
+	public String getUserLevel() {
+		return userLevel;
 	}
 	
 	@Override

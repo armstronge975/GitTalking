@@ -20,7 +20,7 @@
 	 <option class="altOps" value="<%=request.getContextPath()%>/">Logout</option>
   </select>
  <!-- the onclick event handler below will be replaced with a proper logout script at a later date -->
- <input class="userCntrls" type="button" id="logout" onclick="window.location.replace('index.html');" value="Logout">
+ <input class="userCntrls" type="button" id="logout" onclick="window.location.replace('<%=request.getContextPath()%>/');" value="Logout">
  <br><br><h1>Create a Repository</h1>
  <br><a href="<%=request.getContextPath()%>/welcome"><h2 align"center">Go back</h2></a>
  <p style="text-align:center;"><strong>Fill in the needed information below. All fields are required.</strong></p>
@@ -34,15 +34,15 @@
 		<span>Enter the names of collaborators:</span><br>
 		<textarea wrap="hard" rows="4"></textarea>
   	</span><br><br><br>
-  	<a href="tutorial.html"><input type="submit" class="button" value="Create Repository" style="position: relative;left:45%;"></a>
+  	<a href="<%=request.getContextPath()%>/tutorial"><input type="submit" class="button" value="Create Repository" style="position: relative;left:45%;"></a>
   </form>
   <hr>
   <ul class="bottomnavbar">
 	<li class="nvbr"> <a target="_blank" href="https://github.com/armstronge975/GitTalking">Project on GitHub</a></li>
-	<li class="nvbr"> <a href="<%=request.getContextPath()%>/team">The GitTalking Team</a></li>
+	<li class="nvbr"> <a href="<%=request.getContextPath()%>/team2">The GitTalking Team</a></li>
 	<li class="nvbr"> <a href="<%=request.getContextPath()%>/welcome">Back to Home Page</a></li>
-	<li class="nvbr"> <a href="<%=request.getContextPath()%>/about">About</a></li>
-	<li class="nvbr"> <a href="<%=request.getContextPath()%>/upcoming">Coming Up</a></li>
+	<li class="nvbr"> <a href="<%=request.getContextPath()%>/about2">About</a></li>
+	<li class="nvbr"> <a href="<%=request.getContextPath()%>/upcoming2">Coming Up</a></li>
   </ul>
  </body>
 </html>

@@ -20,7 +20,7 @@
 	 <option class="altOps" value="<%=request.getContextPath()%>/">Logout</option>
   </select>
  <!-- the onclick event handler below will be replaced with a proper logout script at a later date -->
- <input class="userCntrls" type="button" id="logout" onclick="window.location.replace('index.html');" value="Logout">
+ <input class="userCntrls" type="button" id="logout" onclick="window.location.replace('<%=request.getContextPath()%>/');" value="Logout">
  <h1>Compose a New Message</h1>
  <br><a href="messages.html"><h2 align"center">Go back</h2></a>
  <p style="text-align:center;"><strong>NOTE: Private messages can only be sent between members collaborating in the same repositories.</strong></p>
@@ -31,15 +31,15 @@
 		<span>Message:</span><br>
 		<textarea wrap="hard" rows="8" style="width:300px;"></textarea>
   	</span><br><br><br>
-  	<input class="button" value="Send Message" onclick="window.location.replace('messages.html');" style="position: relative;left:44%;">
+  	<input class="button" value="Send Message" onclick="window.location.replace('<%=request.getContextPath()%>/messages');" style="position: relative;left:44%;">
   </form>
   <hr>
  <ul class="bottomnavbar">
 	<li class="nvbr"> <a target="_blank" href="https://github.com/armstronge975/GitTalking">Project on GitHub</a></li>
-	<li class="nvbr"> <a href="<%=request.getContextPath()%>/team">The GitTalking Team</a></li>
+	<li class="nvbr"> <a href="<%=request.getContextPath()%>/team2">The GitTalking Team</a></li>
 	<li class="nvbr"> <a href="<%=request.getContextPath()%>/welcome">Back to Home Page</a></li>
-	<li class="nvbr"> <a href="<%=request.getContextPath()%>/about">About</a></li>
-	<li class="nvbr"> <a href="<%=request.getContextPath()%>/upcoming">Coming Up</a></li>
+	<li class="nvbr"> <a href="<%=request.getContextPath()%>/about2">About</a></li>
+	<li class="nvbr"> <a href="<%=request.getContextPath()%>/upcoming2">Coming Up</a></li>
   </ul>
  </body>
 </html>

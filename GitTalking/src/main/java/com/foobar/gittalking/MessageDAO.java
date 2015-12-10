@@ -7,4 +7,5 @@ public interface MessageDAO {
 	
 	public List<Message> getToMessages(String userID) throws SQLException;
 	public int getMaxInt() throws SQLException;
+	public void createMessage(Message message) throws SQLException;
 }

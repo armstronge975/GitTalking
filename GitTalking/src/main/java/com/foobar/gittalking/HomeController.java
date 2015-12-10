@@ -11,28 +11,15 @@
 package com.foobar.gittalking;
 
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Handles requests for the application home page.
@@ -55,14 +42,12 @@ public class HomeController {
 	
 	@RequestMapping(value = "/login", method= RequestMethod.GET)
 	public String goToLogin(Model model) {
-		System.out.println("Enter /login GET mapping");
 		model.addAttribute("user", new User());
 		return "login";
 	}
 	
 	@RequestMapping(value = "/login", method= RequestMethod.POST)
 	public String loginToSite(@ModelAttribute User user, Model model) throws SQLException {
-		System.out.println("Enter /login POST mapping");
 		//Get the Spring Context
         ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
          
@@ -70,11 +55,13 @@ public class HomeController {
         UserDAO userDao = ctx.getBean("userDao", UserDAO.class);       
         boolean success = userDao.accountExists(user.getUserID(),user.getPassword());
         if(success) {
-        	User loginUser = new User();
+        	User loginUser = new User();        	
         	loginUser = userDao.login(user.getUserID(),user.getPassword());
-        	System.out.println("User found: username " + loginUser.getUserID() + ", password: " + loginUser.getPassword());
+        	// must set password because encrypted version is returned
+        	loginUser.setPassword(user.getPassword());
         	model.addAttribute("user", loginUser);
 			model.addAttribute("username", user.getUserID());
+			model.addAttribute("newMsg", new Message());
 			return "welcome";
         }
         else {
@@ -85,18 +72,14 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/register", method= RequestMethod.GET)	
-	public String registerUser(Model model) {
-		System.out.println("Enter /register GET mapping");		
+	public String registerUser(Model model) {	
 		model.addAttribute("user", new User());
 		return "register";
 	
 	}
 	
 	@RequestMapping(value = "/register", method= RequestMethod.POST)
-	public String register(@ModelAttribute User user, Model model) {
-		System.out.println("Enter /register POST mapping");
-		System.out.println("User ID: " + user.getUserID());
-	
+	public String register(@ModelAttribute User user, Model model) {	
 		try {
 			//Get the Spring Context
 	        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
@@ -104,9 +87,8 @@ public class HomeController {
 	        //Get the UserDAO Bean from spring.xml
 	        UserDAO userDao = ctx.getBean("userDao", UserDAO.class);
 	        
-			if(userDao.userIDAvailable(user.getUserID())) {
+			if(!userDao.userExists(user.getUserID())) {
 				System.out.println("Creating new user");
-				System.out.println("Account type: " + user.getAccountType());
 				// create new user
 				userDao.register(user);
 				model.addAttribute("user", user);
@@ -114,7 +96,6 @@ public class HomeController {
 				return "tutorial";
 			}
 			else {			
-				System.out.println("Name already taken");
 				model.addAttribute("message", "Username already taken");
 			}
 		}
@@ -126,105 +107,111 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/viewpublicrepository", method = RequestMethod.GET)
-   public String loginvpr(Locale locale, Model model) {
-		System.out.println("Enter /viewpublicrepository GET mapping");		
+   public String loginvpr(Locale locale, Model model) {		
         return "viewpublicrepository";
     }
 	
 	@RequestMapping(value = "/viewpublicrepository", method = RequestMethod.POST)
    public String viewpublicrepository(@ModelAttribute User user, Model model) {
-	System.out.println("Enter /viewpublicrepository POST mapping");
 	model.addAttribute("user", user);
     return "viewpublicrepository";
    }
 
 	@RequestMapping(value = "/pullrequest", method = RequestMethod.GET)
-	   public String loginpullrequest(Locale locale, Model model) {
-			System.out.println("Enter /pullrequest GET mapping");		
+	   public String loginpullrequest(Locale locale, Model model) {	
 	        return "pullrequest";
 	    }
 		
 		@RequestMapping(value = "/pullrequest", method = RequestMethod.POST)
 	   public String pullrequest(@ModelAttribute User user, Model model) {
-		System.out.println("Enter /pullrequest POST mapping");
 		model.addAttribute("user", user);
 		return "pullrequest";
     }
 	
 	@RequestMapping(value = "/welcome", method = RequestMethod.POST)
-	public String welcome(@ModelAttribute User user, Model model) {	
+	public String welcome(@ModelAttribute User user, @ModelAttribute("newMsg") Message newMsg, Model model) throws SQLException {	
 		model.addAttribute("userId", user.getUserID());
-		System.out.println("Enter /welcome POST mapping");
+		newMsg.setFromUser(user.getUserID());
+		System.out.println("To: " + newMsg.getToUser());
+		System.out.println("From: " + newMsg.getFromUser());
+		System.out.println("Content: " + newMsg.getContent());
+		//Get the Spring Context
+        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+         
+        //Get the Beans
+        UserDAO userDao = ctx.getBean("userDao", UserDAO.class);
+        MessageDAO msgDao = ctx.getBean("messageDao", MessageDAO.class);
+        if(userDao.userExists(newMsg.getToUser())) {
+        	// create message
+        	msgDao.createMessage(newMsg);
+        	model.addAttribute("message", "Message Sent!");
+        }
+        else
+        	model.addAttribute("message","Error: User doesn't exist");
+        model.addAttribute("newMsg", new Message());
 		return "welcome";
 	}
 	
 	@RequestMapping(value = "/team", method = RequestMethod.GET)
-	   public String loginteam(Locale locale, Model model) {
-			System.out.println("Enter /team GET mapping");		
+	   public String loginteam(Locale locale, Model model) {		
 	        return "team";
 	    }
 		
 		@RequestMapping(value = "/team", method = RequestMethod.POST)
 	   public String team(@ModelAttribute User user, Model model) {
-		System.out.println("Enter /team POST mapping");
 		model.addAttribute("user", user);
 	    return "team";
 	   }
 
 
 	@RequestMapping(value = "/about", method = RequestMethod.GET)
-	   public String loginabout(Locale locale, Model model) {
-			System.out.println("Enter /about GET mapping");		
+	   public String loginabout(Locale locale, Model model) {	
 	        return "about";
 	    }
 		
 		@RequestMapping(value = "/about", method = RequestMethod.POST)
 	   public String about(@ModelAttribute User user, Model model) {
-		System.out.println("Enter /about POST mapping");
 		model.addAttribute("user", user);
 	    return "about";
 	   }
 	
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
 	public String returnToHome(@ModelAttribute User user, Model model) {
-		model.addAttribute(user.getUserID());
+		System.out.println("Entering welcome GET");
+		model.addAttribute("newMsg", new Message());
 		return "welcome";
 		
 	}
 	
 	@RequestMapping(value = "/upcoming", method = RequestMethod.GET)
 	public String upcoming(Model model) {
-		System.out.println("Enter /upcoming GET mapping");
 		return "upcoming";		
 	}
 
 	@RequestMapping(value = "/account", method = RequestMethod.GET)
 	public String accountGet(@ModelAttribute("user") User user, Model model) {
 		model.addAttribute("oldUserID",user.getUserID());
-		System.out.println(user.getUserID());
 		return "account";		
 	}
 	
 	@RequestMapping(value = "/account", method= RequestMethod.POST)
 	public String account(@ModelAttribute("user")User user, @ModelAttribute("oldUserID") String oldUserID, Model model) {
 		try {
-			System.out.println(user.getUserID());
-			System.out.println(oldUserID);
 			//Get the Spring Context
 	        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 	         
 	        //Get the UserDAO Bean from spring.xml
 	        UserDAO userDao = ctx.getBean("userDao", UserDAO.class);
 	        if(!oldUserID.equals(user.getUserID())) {
-	        	if(userDao.userIDAvailable(user.getUserID())) {
+	        	if(!userDao.userExists(user.getUserID())) {
 					// update user
 					userDao.updateUser(user,oldUserID);
 					model.addAttribute("message", "Account successfully updated");
-					model.addAttribute("username", user.getUserID());
+					model.addAttribute("oldUserID", user.getUserID());
+					model.addAttribute("newMsg", new Message());
 					return "welcome";
 				}
 				else {			
-					System.out.println("Name already taken");
 					model.addAttribute("message", "Username already taken");
 				}
 	        }
@@ -233,6 +220,7 @@ public class HomeController {
 				userDao.updateUser(user,oldUserID);
 				model.addAttribute("message", "Account successfully updated");
 				model.addAttribute("username", user.getUserID());
+				model.addAttribute("newMsg", new Message());
 				return "welcome";				
 	        }
 			
@@ -247,16 +235,10 @@ public class HomeController {
 	public String timeline(@ModelAttribute User user, Model model) throws SQLException {
 		// get database connection
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");     
-        //Get the Beans from spring.xml
-        UserDAO userDao = ctx.getBean("userDao", UserDAO.class);
+        //Get the Bean from spring.xml
         TimelineDAO tlDao = ctx.getBean("timelineDao", TimelineDAO.class);
         Timeline tl = new Timeline();
-        if(userDao.userInAdmin(user.getUserID())) {
-        	tl = tlDao.findAdminTimeline(user.getUserID());
-        }
-        else if(userDao.userInStandard(user.getUserID())) {
-        	tl = tlDao.findStandardTimeline(user.getUserID());
-        }
+        tl = tlDao.findUserTimeline(user.getUserID());
         model.addAttribute("timeline", new Timeline());
         model.addAttribute("timelineContent",tl.getContent());
         model.addAttribute("username",tl.getUserID());
@@ -264,7 +246,7 @@ public class HomeController {
         // get all public messages of user
         MessageDAO messageDao = ctx.getBean("messageDao", MessageDAO.class);
         List<Message> msgList = messageDao.getToMessages(user.getUserID());
-        model.addAttribute(msgList);
+        model.addAttribute("msgList",msgList);
 		return "timeline";		
 	}
 	
@@ -273,10 +255,13 @@ public class HomeController {
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 		TimelineDAO tlDao = ctx.getBean("timelineDao", TimelineDAO.class);
 		tlDao.updateTimeline(timeline.getContent(), user.getUserID());
-		model.addAttribute("timeline", new Timeline());
+		model.addAttribute("timeline", timeline);
         model.addAttribute("timelineContent",timeline.getContent());
 		model.addAttribute("username",user.getUserID());
-		model.addAttribute("message", "Profile Succfully Updated");		
+		model.addAttribute("message", "Profile Successfully Updated");
+		MessageDAO messageDao = ctx.getBean("messageDao", MessageDAO.class);
+        List<Message> msgList = messageDao.getToMessages(user.getUserID());
+		model.addAttribute("msgList",msgList);
 		return "timeline";
 	}
 	
@@ -305,4 +290,26 @@ public class HomeController {
 		return "publicRepos";		
 	}
 
+	@RequestMapping(value = "/tutorial", method = RequestMethod.GET)
+	public String tutorial(Model model) {
+		return "tutorial";		
+	}
+	
+	@RequestMapping(value = "/team2", method = RequestMethod.GET)
+	public String team2(@ModelAttribute("user") User user, Model model) {
+		model.addAttribute("user", user);
+		return "team2";		
+	}
+	
+	@RequestMapping(value = "/upcoming2", method = RequestMethod.GET)
+	public String upcoming2(@ModelAttribute("user") User user, Model model) {
+		model.addAttribute("user", user);
+		return "upcoming2";		
+	}
+	
+	@RequestMapping(value = "/about2", method = RequestMethod.GET)
+	public String about2(@ModelAttribute("user") User user, Model model) {
+		model.addAttribute("user", user);
+		return "about2";		
+	}
 }

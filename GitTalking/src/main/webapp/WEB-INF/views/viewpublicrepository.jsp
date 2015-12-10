@@ -63,10 +63,10 @@
   <!-- Links, in order: GitHub repository link, meet the team, about us page, and upcoming features page.-->
   <ul class="bottomnavbar">
 	<li class="nvbr"> <a target="_blank" href="https://github.com/armstronge975/GitTalking">Project on GitHub</a></li>
-	<li class="nvbr"> <a href="<%=request.getContextPath()%>/team">The GitTalking Team</a></li>
+	<li class="nvbr"> <a href="<%=request.getContextPath()%>/team2">The GitTalking Team</a></li>
 	<li class="nvbr"> <a href="<%=request.getContextPath()%>/welcome">Back to Home Page</a></li>
-	<li class="nvbr"> <a href="<%=request.getContextPath()%>/about">About</a></li>
-	<li class="nvbr"> <a href="<%=request.getContextPath()%>/upcoming">Coming Up</a></li>
+	<li class="nvbr"> <a href="<%=request.getContextPath()%>/about2">About</a></li>
+	<li class="nvbr"> <a href="<%=request.getContextPath()%>/upcoming2">Coming Up</a></li>
   </ul>
  </body>
 </html>

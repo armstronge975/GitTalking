@@ -36,12 +36,14 @@ public class TimelineDAOImpl implements TimelineDAO {
          	pstmt.setString(2, userID);        	       	
          	pstmt.executeUpdate();    
 	    }
-	    
+	   
+	// generate user's timeline when they wish to view it
 	@Override
 	public Timeline findUserTimeline(String userID) throws SQLException {
 		String query = "SELECT * from timeline INNER JOIN users ON timeline.user_id_fk = users.user_id WHERE timeline.user_id_fk = ?";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);      
         //using RowMapper anonymous class, we can create a separate RowMapper for reuse
+		// expects timeline object; sets userID as only argument to substitute for ? in query
         Timeline timeline = jdbcTemplate.queryForObject(query, new Object[]{userID}, new RowMapper<Timeline>(){ 
                @Override
                public Timeline mapRow(ResultSet rs, int rowNum)
@@ -55,6 +57,7 @@ public class TimelineDAOImpl implements TimelineDAO {
         return timeline;
 	}
 	
+	// user edits timeline information in timeline.jsp
 	@Override
     public void updateTimeline(String content,String userID) throws SQLException {
     	String query = "UPDATE timeline SET timeline_content = ? WHERE user_id_fk = ?";

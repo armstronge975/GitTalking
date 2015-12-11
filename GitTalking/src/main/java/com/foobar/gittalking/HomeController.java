@@ -61,6 +61,8 @@ public class HomeController {
         	loginUser.setPassword(user.getPassword());
         	model.addAttribute("user", loginUser);
 			model.addAttribute("username", user.getUserID());
+			// needed to make modelattribute available on welcome page
+			// unless it's a session attribute, model attributes are only available to the single page
 			model.addAttribute("newMsg", new Message());
 			return "welcome";
         }
@@ -106,6 +108,7 @@ public class HomeController {
 		return "register";
 	}
 	
+	// simple mappings to pages without any forms or additional model attributes
 	@RequestMapping(value = "/viewpublicrepository", method = RequestMethod.GET)
    public String loginvpr(Locale locale, Model model) {		
         return "viewpublicrepository";
@@ -128,17 +131,15 @@ public class HomeController {
 		return "pullrequest";
     }
 	
+	// send public message with form
 	@RequestMapping(value = "/welcome", method = RequestMethod.POST)
 	public String welcome(@ModelAttribute User user, @ModelAttribute("newMsg") Message newMsg, Model model) throws SQLException {	
 		model.addAttribute("userId", user.getUserID());
 		newMsg.setFromUser(user.getUserID());
-		System.out.println("To: " + newMsg.getToUser());
-		System.out.println("From: " + newMsg.getFromUser());
-		System.out.println("Content: " + newMsg.getContent());
 		//Get the Spring Context
         ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
          
-        //Get the Beans
+        //Get the Beans; connect to both classes
         UserDAO userDao = ctx.getBean("userDao", UserDAO.class);
         MessageDAO msgDao = ctx.getBean("messageDao", MessageDAO.class);
         if(userDao.userExists(newMsg.getToUser())) {
@@ -194,6 +195,7 @@ public class HomeController {
 		return "account";		
 	}
 	
+	// calls database functions to edit account details
 	@RequestMapping(value = "/account", method= RequestMethod.POST)
 	public String account(@ModelAttribute("user")User user, @ModelAttribute("oldUserID") String oldUserID, Model model) {
 		try {
@@ -231,6 +233,7 @@ public class HomeController {
 		return "account";
 	}
 	
+	// retrieves timeline information and list of received public messages
 	@RequestMapping(value = "/timeline", method = RequestMethod.GET)
 	public String timeline(@ModelAttribute User user, Model model) throws SQLException {
 		// get database connection
@@ -250,6 +253,7 @@ public class HomeController {
 		return "timeline";		
 	}
 	
+	// handles update of user's timeline information
 	@RequestMapping(value = "/timeline", method = RequestMethod.POST)
 	public String timelinePost(@ModelAttribute("timeline") Timeline timeline,@ModelAttribute User user, Model model) throws SQLException {
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
@@ -295,6 +299,7 @@ public class HomeController {
 		return "tutorial";		
 	}
 	
+	// clones of pages with similar names, but user is already logged in here 
 	@RequestMapping(value = "/team2", method = RequestMethod.GET)
 	public String team2(@ModelAttribute("user") User user, Model model) {
 		model.addAttribute("user", user);

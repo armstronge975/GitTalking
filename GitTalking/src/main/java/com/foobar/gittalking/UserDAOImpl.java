@@ -27,7 +27,6 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void register(User user) throws SQLException {
     		String query = "INSERT INTO users VALUES (?,?,?,?,?,AES_ENCRYPT(?,'.key.'),'standard')";
-    		//String query = "INSERT INTO users VALUES (?,?,?,?,?,?,'standard')";
         	PreparedStatement pstmt = dataSource.getConnection().prepareStatement(query);
         	// setString fills in values of each question mark
          	pstmt.setString(1, user.getUserID());
